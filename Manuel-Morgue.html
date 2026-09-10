@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Manuel autonome bilingue de Morgue : bibliothèque, classement, renommage et Atelier. / Offline bilingual Morgue user manual.">
+<title>Morgue / Manuel d’utilisation</title>
+<style>
+:root{--blue:#1f3a44;--red:#7f2d30;--paper:#f4f1ea;--ink:#243b46;--line:#dce1e4;--muted:#536774;--top:78px}
+*{box-sizing:border-box}html{scroll-padding-top:100px}body{margin:0;background:white;color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}[hidden]{display:none!important}
+a{color:var(--red);text-underline-offset:3px}button,input{font:inherit}button{cursor:pointer;border:1px solid transparent;border-radius:5px;padding:8px 13px}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #9bb9c4;outline-offset:3px}
+.skip{position:fixed;left:12px;top:-100px;background:white;z-index:10;padding:10px}.skip:focus{top:10px}
+header{position:sticky;top:0;z-index:3;background:var(--blue);color:white;min-height:var(--top);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px;border-bottom:3px solid var(--red)}
+.brand{font-size:24px;letter-spacing:-.5px;font-weight:750}.brand small{font-size:12px;font-weight:400;letter-spacing:1px;margin-left:18px;text-transform:uppercase;color:#d4e1e5}.tools{display:flex;align-items:center;gap:8px}.languages{display:flex;gap:3px;margin-right:10px}.languages button{background:transparent;color:white}.languages button[aria-pressed=true]{background:var(--paper);color:var(--blue);font-weight:750}.tools>button{background:var(--paper);color:var(--red)}#menu{display:none}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:1500px;margin:auto}aside{position:sticky;top:var(--top);height:calc(100vh - var(--top));overflow:auto;padding:26px 20px 32px 26px;background:var(--paper);border-right:1px solid var(--line)}
+aside label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.searchbox{display:flex;gap:5px}input{min-width:0;width:100%;border:1px solid #bac4c8;border-radius:4px;background:white;color:var(--ink);padding:9px;font-size:14px}.searchbox button{background:var(--blue);color:white;padding:5px 10px}.status{font-size:12px;color:var(--muted);min-height:1.7em;margin:8px 0 16px}nav{display:grid;gap:3px}nav a{font-size:13px;line-height:1.45;color:var(--ink);text-decoration:none;padding:9px 10px;border-left:3px solid transparent;border-radius:0 4px 4px 0}nav a:hover,nav a[aria-current]{background:white;border-left-color:var(--red)}
+main{min-width:0;padding:38px clamp(24px,4vw,72px) 70px;max-width:1100px}h1{font-size:clamp(29px,4vw,43px);line-height:1.17;letter-spacing:-1px;margin:14px 0 20px}h2{font-size:26px;line-height:1.3;color:var(--blue);margin:0 0 24px;letter-spacing:-.4px}h3{font-size:18px;line-height:1.4;margin:28px 0 10px;color:var(--red)}p{margin:0 0 18px}li{margin:8px 0}ul,ol{padding-left:26px}section{padding:42px 0 26px;border-top:1px solid var(--line);scroll-margin-top:20px}.intro{padding-bottom:32px}.intro>p:first-of-type{font-size:20px;color:var(--red)}.intro>p:nth-of-type(2){font-size:13px;font-weight:600;color:var(--muted)}section[data-chapter="9"] h2,section[data-chapter="10"] h2,section[data-chapter="11"] h2,section[data-chapter="12"] h2{color:var(--red)}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;margin:22px 0 27px;table-layout:fixed}th{text-align:left;background:var(--blue);color:white;font-weight:650;padding:12px 14px}th:first-child{width:38%}td{vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}tr:nth-child(even) td{background:#f5f7f8}code{font: .88em/1.5 ui-monospace,Consolas,monospace;overflow-wrap:anywhere;color:var(--red)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--paper);padding:18px;border-left:3px solid var(--red);border-radius:0 5px 5px 0}pre code{color:var(--ink)}.noresults{padding:30px;background:var(--paper);border-left:3px solid var(--red)}.print-note{font-size:12px;color:var(--muted);margin-top:25px}.return{font-size:14px}footer{padding-top:25px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:900px){:root{--top:74px}header{padding:12px 16px}.brand small{display:none}.layout{grid-template-columns:240px 1fr}aside{padding:20px 14px}main{padding:28px 22px}body{font-size:16px}h2{font-size:23px}}
+@media(max-width:680px){:root{--top:114px}header{flex-wrap:wrap;gap:8px}.brand{font-size:22px}.tools{width:100%;justify-content:flex-end}.tools button{font-size:13px;padding:7px 10px}#menu{display:block;margin-right:auto}.layout{display:block}aside{display:none;position:relative;top:0;height:auto;max-height:65vh;border-right:0;border-bottom:1px solid var(--line)}aside.open{display:block}main{padding:24px 18px}table{font-size:12px}td,th{padding:9px}h1{font-size:30px}.languages{margin-right:0}}
+@page{size:A4;margin:18mm 16mm}
+@media print{body{font:10.5pt/1.45 Georgia,serif;color:#111}header,aside,.skip,.return,.noresults,footer{display:none!important}.layout,main{display:block;max-width:none;padding:0;margin:0}.intro{padding-bottom:14pt}h1{font-size:27pt}h2{font-size:19pt;color:#111}h3{font-size:12pt;color:#111}article:not([hidden]) section{display:block!important}section{break-before:page;border:0;padding:0}h2,h3{break-after:avoid}p{orphans:3;widows:3}table{font-size:9pt;table-layout:fixed}thead{display:table-header-group}tr{break-inside:avoid}th{background:white!important;color:#111;border-bottom:1pt solid #333}td{background:white!important;padding:7pt 5pt}code{color:#111}pre{background:white;border:1px solid #bbb}a{color:#111;text-decoration:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" id="skip">Aller au manuel</a>
+<header>
+ <div class="brand">Morgue <small id="subtitle">Manuel d’utilisation / 3.1.12</small></div>
+ <div class="tools">
+  <button id="menu" aria-expanded="false" aria-controls="sidebar">Sommaire</button>
+  <div class="languages" role="group" aria-label="Langue / Language">
+   <button lang="fr" data-lang="fr" aria-pressed="true">FR</button><button lang="en" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+  <button id="print">Imprimer / PDF</button>
+ </div>
+</header>
+<div class="layout">
+ <aside id="sidebar">
+  <label for="search" id="searchlabel">Rechercher dans le manuel</label>
+  <div class="searchbox"><input id="search" type="search" autocomplete="off" placeholder="Ex. collecte, niveaux…"><button id="clear" aria-label="Effacer la recherche">×</button></div>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <nav lang="fr" id="contents-fr"><a href="#fr-01" data-chapter="1">1. Comprendre Morgue</a><a href="#fr-02" data-chapter="2">2. Installer et ouvrir</a><a href="#fr-03" data-chapter="3">3. Première utilisation</a><a href="#fr-04" data-chapter="4">4. Navigation, langues et aide</a><a href="#fr-05" data-chapter="5">5. Bibliothèque : indexer et parcourir</a><a href="#fr-06" data-chapter="6">6. Rechercher efficacement</a><a href="#fr-07" data-chapter="7">7. Favoris, collecte et export</a><a href="#fr-08" data-chapter="8">8. Corriger un nom depuis Bibliothèque</a><a href="#fr-09" data-chapter="9">9. Classer / Renommer : construire les noms</a><a href="#fr-10" data-chapter="10">10. Rechercher et modifier les niveaux</a><a href="#fr-11" data-chapter="11">11. Architecture et langue de classement</a><a href="#fr-12" data-chapter="12">12. Ranger les fichiers dans les dossiers</a><a href="#fr-13" data-chapter="13">13. Atelier : préparer une séance</a><a href="#fr-14" data-chapter="14">14. Atelier : observer et analyser</a><a href="#fr-15" data-chapter="15">15. Raccourcis clavier</a><a href="#fr-16" data-chapter="16">16. Réglages, sauvegarde et déplacement</a><a href="#fr-17" data-chapter="17">17. Résoudre les difficultés courantes</a><a href="#fr-18" data-chapter="18">18. Repères et crédits</a></nav><nav lang="en" id="contents-en" hidden><a href="#en-01" data-chapter="1">1. Understanding Morgue</a><a href="#en-02" data-chapter="2">2. Installing and launching</a><a href="#en-03" data-chapter="3">3. Getting started</a><a href="#en-04" data-chapter="4">4. Navigation, languages and help</a><a href="#en-05" data-chapter="5">5. Library: indexing and browsing</a><a href="#en-06" data-chapter="6">6. Searching effectively</a><a href="#en-07" data-chapter="7">7. Favorites, collection and export</a><a href="#en-08" data-chapter="8">8. Correcting a filename in the Library</a><a href="#en-09" data-chapter="9">9. Organize / Rename: building filenames</a><a href="#en-10" data-chapter="10">10. Finding and editing levels</a><a href="#en-11" data-chapter="11">11. Structure and classification language</a><a href="#en-12" data-chapter="12">12. Sorting files into folders</a><a href="#en-13" data-chapter="13">13. Studio: preparing a session</a><a href="#en-14" data-chapter="14">14. Studio: observing and analyzing</a><a href="#en-15" data-chapter="15">15. Keyboard shortcuts</a><a href="#en-16" data-chapter="16">16. Settings, backup and relocation</a><a href="#en-17" data-chapter="17">17. Troubleshooting</a><a href="#en-18" data-chapter="18">18. Terms and credits</a></nav>
+  <p class="print-note" id="printnote">L’impression inclut toute l’édition choisie, même après une recherche.</p>
+ </aside>
+ <main id="main" tabindex="-1">
+  <p id="noresults" class="noresults" hidden>Aucun chapitre trouvé. Essayez un autre mot.</p>
+  <article lang="fr" id="edition-fr"><div class="intro"><h1 id="morgue-manuel-dutilisation">Morgue / Manuel d’utilisation</h1>
+<p><strong>Bibliothèque, classement et étude de références visuelles</strong></p>
+<p>Manuel pour Morgue 3.1.12 / Édition du 10 septembre 2026.</p>
+<p>Programme conçu et développé par Simon Léturgie dans le cadre d’Eigrutel BD Academy. Eigrutel Lab / Atelier d’outils libres pour la bande dessinée.</p>
+<p>Ce manuel accompagne l’application de bureau Python et son exécutable Windows. Il se lit indépendamment du programme. La version HTML contient les éditions française et anglaise, un sommaire, une recherche et une présentation pour l’impression. Elle fonctionne hors connexion ; son sélecteur de langue ne change pas celui de Morgue.</p>
+</div><section id="fr-01" data-chapter="1" tabindex="-1"><h2 id="fr-comprendre-morgue">1. Comprendre Morgue</h2>
+<p>Morgue rassemble dans une seule application les fonctions des anciens programmes Documentation Renamer et Index Documentation. Vous préparez vos références, les retrouvez puis les utilisez pour dessiner sans lancer deux logiciels.</p>
+<p>Deux espaces partagent la même fenêtre et le même dossier de travail : <strong>Bibliothèque</strong>, au bandeau bleu sombre, et <strong>Classer / Renommer</strong>, au bandeau rouge sombre. L’<strong>Atelier</strong>, accessible depuis Bibliothèque, ouvre une fenêtre d’étude et de dessin chronométré.</p>
+<p>Le principe documentaire repose sur les <strong>noms des fichiers et des dossiers</strong>. Morgue ne reconnaît pas automatiquement ce que représente une image, ne traduit pas son sujet et n’effectue pas de recherche visuelle par intelligence artificielle. Une photographie de cheval nommée <code>IMG_4582.jpg</code> ne sera pas retrouvée en tapant « cheval » si ce mot n’apparaît pas dans les informations recherchées.</p>
+<p>Le préfixe commun <strong><code>DOCUMENTATION_</code></strong> permet à la Bibliothèque d’identifier les images à indexer. Il reste identique en français et en anglais. Vos images restent des fichiers ordinaires sur votre disque ; l’index est un catalogue qui permet de les retrouver, pas une copie de ces images.</p>
+</section><section id="fr-02" data-chapter="2" tabindex="-1"><h2 id="fr-installer-et-ouvrir">2. Installer et ouvrir</h2>
+<h3 id="fr-utiliser-lexécutable-windows">Utiliser l’exécutable Windows</h3>
+<p>Placez <code>Morgue-3.1.12.exe</code> dans un dossier où vous avez le droit d’écrire, puis ouvrez-le. Python n’est pas nécessaire pour utiliser un exécutable déjà construit. Les ressources et modules nécessaires à l’application sont inclus dans cet exécutable ; les données de travail et les réglages sont enregistrés à côté de lui.</p>
+<p>Le dossier du programme et votre dossier d’images ont des rôles différents : le premier contient le logiciel et ses données de fonctionnement ; le second contient les références à consulter et à classer. Choisissez ce dernier dans Morgue.</p>
+<h3 id="fr-utiliser-les-sources-python">Utiliser les sources Python</h3>
+<p>Conservez ensemble tous les fichiers de l’archive du programme. Avec Python 3.10 ou ultérieur et Tkinter disponibles, ouvrez un terminal dans ce dossier et exécutez :</p>
+<pre class="text"><code>py -3 -m pip install -r requirements.txt
+py -3 EigrutelMorgue.py</code></pre>
+<p>Pour fabriquer l’exécutable sur Windows, lancez <strong>Construire_Morgue.cmd</strong>. La première construction télécharge les dépendances ; le résultat se trouve dans <code>dist/Morgue-3.1.12.exe</code>. Modifier un fichier Python ne met pas à jour un exécutable déjà construit.</p>
+<h3 id="fr-formats-acceptés">Formats acceptés</h3>
+<p>Morgue reconnaît les images <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.webp</code>, <code>.bmp</code>, <code>.tif</code> et <code>.tiff</code>. Les PDF, vidéos, documents texte et fichiers Photoshop ne font pas partie de ce parcours. Une extension reconnue ne garantit pas qu’un fichier endommagé sera lisible.</p>
+<p>La Bibliothèque exige aussi le préfixe <code>DOCUMENTATION_</code>. Classer / Renommer accepte les images compatibles avant leur renommage. L’Atelier peut ouvrir un fichier ou un dossier externe sans exiger ce préfixe.</p>
+</section><section id="fr-03" data-chapter="3" tabindex="-1"><h2 id="fr-première-utilisation">3. Première utilisation</h2>
+<h3 id="fr-vos-images-ne-sont-pas-encore-préparées">Vos images ne sont pas encore préparées</h3>
+<ol type="1">
+<li>Ouvrez <strong>Classer / Renommer</strong>, puis <strong>Choisir dossier</strong>.</li>
+<li>Cochez <strong>Inclure sous-dossiers</strong> si les images sont réparties dans plusieurs dossiers.</li>
+<li>Choisissez vos niveaux de classement, puis les marqueurs utiles et éventuellement une précision.</li>
+<li>Lisez le <strong>Nom cible</strong> et cliquez sur <strong>RENOMMER (Entrée)</strong>. Le programme passe à l’image suivante.</li>
+<li>Pour organiser aussi les dossiers physiques, utilisez <strong>Ranger DOCUMENTATION</strong>, décrit au chapitre 12.</li>
+<li>Passez dans <strong>Bibliothèque</strong>, vérifiez le dossier choisi et lancez <strong>Indexer / Réindexer</strong> pour établir le catalogue initial de votre ensemble.</li>
+</ol>
+<h3 id="fr-vos-images-portent-déjà-des-noms-documentation_">Vos images portent déjà des noms DOCUMENTATION_</h3>
+<ol type="1">
+<li>Dans Bibliothèque, cliquez sur <strong>charger DOCUMENTATION</strong> et choisissez la racine de votre documentation.</li>
+<li>Cliquez sur <strong>Indexer / Réindexer</strong>. Les sous-dossiers sont inclus dans cette indexation.</li>
+<li>Attendez la fin, puis saisissez un mot présent dans un nom de fichier ou un dossier.</li>
+<li>Cliquez sur une vignette pour examiner l’image. Marquez-la comme favorite ou ajoutez-la à la collecte si elle vous intéresse.</li>
+</ol>
+<p>Une réindexation n’est pas nécessaire après chaque renommage réalisé dans Morgue : les modifications internes sont synchronisées avec l’index. Elle reste utile pour découvrir un ensemble existant ou des changements effectués hors de Morgue.</p>
+</section><section id="fr-04" data-chapter="4" tabindex="-1"><h2 id="fr-navigation-langues-et-aide">4. Navigation, langues et aide</h2>
+<p>Le titre <strong>Morgue</strong> reste à la même place dans les deux bandeaux. Les boutons de navigation indiquent aussi leur destination par leur couleur : rouge pour Classer / Renommer, bleu sombre pour Bibliothèque. Cliquer sur l’espace déjà actif ne recommence pas le parcours.</p>
+<p>Depuis Bibliothèque, <strong>Classer / Renommer</strong> reprend l’image sélectionnée et les résultats actuellement chargés. Les boutons Précédent et Suivant du renommeur parcourent alors cet ensemble. Pour traiter tout un dossier, utilisez <strong>Choisir dossier</strong> dans le renommeur. Ne confondez pas ce parcours limité aux résultats avec le rangement automatique, qui examine le dossier source selon l’option sous-dossiers.</p>
+<p><strong>FR / EN</strong> change immédiatement les commandes et les aides. Le choix est mémorisé, mais vos fichiers, catégories et mots de recherche ne sont pas traduits. Le bouton <strong>Classement…</strong>, dans Classer / Renommer, choisit séparément le modèle de catégories et le vocabulaire des futurs noms. Voir le chapitre 11.</p>
+<p>Le <strong>i du bandeau</strong> ouvre l’aide de l’espace courant et la page <strong>À propos</strong>, avec sommaire cliquable. Le bouton <strong>Manuel complet</strong>, en bas du panneau, ouvre ce manuel dans votre navigateur, hors connexion et dans la langue active de Morgue. Il est accessible depuis les deux espaces et depuis les pages Aide et À propos. Le manuel est inclus dans l’exécutable ; la page reste consultable après la fermeture de Morgue. La case <strong>Afficher les infobulles</strong> active ou désactive les aides au survol pour tout le programme. Ce choix est conservé entre les ouvertures. Le <strong>petit i sous l’image du renommeur</strong> affiche les métadonnées du fichier : c’est une autre fonction.</p>
+<p>Sur les versions compatibles de Windows, la barre de titre adopte la couleur de l’espace actif. Si cette personnalisation n’est pas prise en charge, Windows conserve son habillage habituel.</p>
+</section><section id="fr-05" data-chapter="5" tabindex="-1"><h2 id="fr-bibliothèque-indexer-et-parcourir">5. Bibliothèque : indexer et parcourir</h2>
+<p>La Bibliothèque présente les vignettes à gauche, une grande image au centre et les commandes de recherche, collecte et Atelier à droite. Le nombre d’images indexées décrit le catalogue ; le nombre de résultats dépend de la recherche courante.</p>
+<p><strong>Indexer / Réindexer</strong> analyse le dossier choisi et ses sous-dossiers. L’ancien index reste disponible jusqu’à la réussite de la nouvelle indexation. <strong>Échap</strong> permet d’interrompre l’opération. Pendant ce traitement, Morgue bloque le renommage, le rangement et le changement de dossier pour éviter des chemins incohérents.</p>
+<p>Les résultats se chargent par <strong>tranches de 500</strong>. Une indication comme <code>500 / 9491</code> signifie que 500 correspondances sont chargées sur 9 491. Utilisez le bouton de chargement supplémentaire au bas de la grille pour poursuivre. La commande de collecte de tous les résultats et la source « Recherche actuelle » de l’Atelier utilisent uniquement les résultats chargés.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Geste ou commande</th>
+<th>Effet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clic sur une vignette</td>
+<td>Sélectionner l’image et l’afficher au centre.</td>
+</tr>
+<tr class="even">
+<td>Double-clic sur une vignette</td>
+<td>Ouvrir le fichier dans l’application associée du système.</td>
+</tr>
+<tr class="odd">
+<td>Molette sur les résultats</td>
+<td>Faire défiler les vignettes.</td>
+</tr>
+<tr class="even">
+<td>Précédent / Suivant</td>
+<td>Parcourir les résultats chargés.</td>
+</tr>
+<tr class="odd">
+<td>Ouvrir image</td>
+<td>Ouvrir l’image courante dans votre visionneuse habituelle.</td>
+</tr>
+<tr class="even">
+<td>Ouvrir dossier</td>
+<td>Accéder à son emplacement sur le disque.</td>
+</tr>
+</tbody>
+</table>
+<p>Sous l’aperçu, le nom et le dossier permettent de retrouver le fichier réel. L’image affichée est un aperçu ; son affichage ne transforme pas le fichier source.</p>
+</section><section id="fr-06" data-chapter="6" tabindex="-1"><h2 id="fr-rechercher-efficacement">6. Rechercher efficacement</h2>
+<p>La recherche ignore la casse et les accents et accepte des fragments de mots. Plusieurs termes doivent tous correspondre, éventuellement dans des endroits différents du nom et du chemin. Une courte temporisation lance la recherche pendant la frappe ; <strong>Entrée</strong> la déclenche immédiatement.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requête</th>
+<th>Résultat recherché</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cheval</code></td>
+<td>Présence de ce fragment dans le nom ou le chemin.</td>
+</tr>
+<tr class="even">
+<td><code>cheval rouge</code></td>
+<td>Présence des deux termes.</td>
+</tr>
+<tr class="odd">
+<td><code>cheval -course</code></td>
+<td>Cheval, en excluant les correspondances contenant course.</td>
+</tr>
+<tr class="even">
+<td><code>-chat</code></td>
+<td>Exclusion seule, sans terme positif obligatoire.</td>
+</tr>
+<tr class="odd">
+<td><code>"scene de rue"</code></td>
+<td>Groupe de mots recherché ensemble dans le texte normalisé.</td>
+</tr>
+<tr class="even">
+<td><code>nom:cheval</code></td>
+<td>Recherche limitée au nom du fichier.</td>
+</tr>
+<tr class="odd">
+<td><code>dossier:costume</code></td>
+<td>Recherche limitée au chemin du dossier.</td>
+</tr>
+<tr class="even">
+<td><code>ext:jpg</code></td>
+<td>Extension jpg ; jpeg est une extension distincte.</td>
+</tr>
+<tr class="odd">
+<td><code>dossier:costume -nom:essai</code></td>
+<td>Dossier contenant costume, sans essai dans le nom.</td>
+</tr>
+</tbody>
+</table>
+<p>Les alias anglais <strong><code>name:</code></strong> et <strong><code>folder:</code></strong> fonctionnent aussi lorsque l’interface est en français. Les alias français fonctionnent en anglais. En revanche, <code>cheval</code> et <code>horse</code> ne sont pas traduits l’un en l’autre : recherchez les termes réellement présents dans votre documentation.</p>
+<p>Les underscores des noms sont également interprétés comme des séparateurs de mots pendant la recherche. Ainsi, <code>"scene de rue"</code> peut retrouver <code>scene_de_rue</code>. Sans guillemets, <code>scene rue</code> impose les deux termes sans imposer leur proximité.</p>
+<p>Les cases <strong>Composition, Forme, Silhouette, Couleur, Lumière, Valeurs, Échelle</strong> ajoutent leurs mots à la recherche. Elles n’analysent pas l’image. Plusieurs cases cumulent les critères. Les mots insérés correspondent à la langue de classement, pas nécessairement à celle de l’interface.</p>
+<p><strong>Favoris</strong> et <strong>Collecte</strong> limitent la recherche aux images marquées. Si les deux sont cochés, les images appartenant à l’un <strong>ou</strong> à l’autre groupe sont retenues, tout en respectant les autres termes de recherche. Les boutons <strong>=★</strong> et <strong>=☑</strong> du bandeau activent ces filtres ; ils ne marquent pas l’image courante.</p>
+<p><strong>Reset recherche</strong> vide la requête et désactive les filtres. Il n’efface ni les fichiers, ni les favoris, ni la collecte. Dans le champ Recherche, les flèches haut et bas rappellent l’historique ; le clic droit permet de l’effacer.</p>
+<p>Commencez par un terme simple. Si les résultats sont trop nombreux, ajoutez une notion d’usage graphique, un dossier ou une exclusion. Si la recherche ne donne rien, retirez les filtres avant de conclure que l’image manque.</p>
+</section><section id="fr-07" data-chapter="7" tabindex="-1"><h2 id="fr-favoris-collecte-et-export">7. Favoris, collecte et export</h2>
+<p>Un <strong>favori</strong> désigne une référence que vous souhaitez retrouver durablement. La <strong>collecte</strong> constitue une sélection de travail, par exemple pour une scène ou un album. Les deux indicateurs sont indépendants et mémorisés par bibliothèque ; la collecte n’est pas effacée simplement en fermant Morgue.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Commande</th>
+<th>Effet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Étoile sous l’aperçu</td>
+<td>Ajouter ou retirer le favori de l’image courante.</td>
+</tr>
+<tr class="even">
+<td>Petit carré sur une vignette</td>
+<td>Ajouter ou retirer cette image de la collecte.</td>
+</tr>
+<tr class="odd">
+<td>Carré sous l’aperçu / bouton Image</td>
+<td>Ajouter ou retirer l’image courante de la collecte.</td>
+</tr>
+<tr class="even">
+<td>Tous les résultats</td>
+<td>Ajouter à la collecte les résultats actuellement chargés.</td>
+</tr>
+<tr class="odd">
+<td>Afficher collecte</td>
+<td>Afficher la collecte en effaçant la recherche textuelle courante.</td>
+</tr>
+<tr class="even">
+<td>Purger collecte</td>
+<td>Retirer tous les indicateurs de collecte après confirmation. Les images restent sur le disque.</td>
+</tr>
+<tr class="odd">
+<td>Exporter collecte</td>
+<td>Copier les images collectées dans le dossier de votre choix.</td>
+</tr>
+</tbody>
+</table>
+<p>L’export concerne l’ensemble de la collecte indexée de la bibliothèque active, même si toutes ses vignettes ne sont pas chargées. Il rassemble les copies dans le dossier choisi, sans reproduire l’arborescence d’origine. Un nom déjà présent reçoit un suffixe pour éviter l’écrasement. Les erreurs de copie sont signalées ; les originaux restent en place.</p>
+<p>Une méthode utile consiste à collecter largement pour un projet, puis à marquer comme favorites les références les plus claires. Le marqueur <strong>Master</strong> du nom de fichier est encore autre chose : cocher Master dans le renommeur ne crée pas automatiquement un favori dans la base.</p>
+</section><section id="fr-08" data-chapter="8" tabindex="-1"><h2 id="fr-corriger-un-nom-depuis-bibliothèque">8. Corriger un nom depuis Bibliothèque</h2>
+<p>Sélectionnez l’image, modifiez le champ sous l’aperçu et cliquez sur <strong>Renommer</strong>, ou utilisez <strong>Ctrl+Entrée dans ce champ</strong>. Cette commande renomme réellement le fichier dans son dossier et actualise l’index.</p>
+<p>Conservez l’extension d’origine. Si vous l’omettez, Morgue la remet ; si vous tentez de la changer, il le refuse. Les noms vides, les caractères interdits sous Windows et les collisions sont refusés. Changer un nom de fichier ne convertit pas son format.</p>
+<p>Conservez aussi le préfixe <code>DOCUMENTATION_</code> pour que le document reste admissible à l’indexation. Un nom modifié peut ne plus correspondre à la recherche en cours et donc disparaître des résultats sans que le fichier ait été supprimé.</p>
+<p>Pour construire un nom à partir des niveaux, des types et des usages graphiques, passez dans <strong>Classer / Renommer</strong>.</p>
+</section><section id="fr-09" data-chapter="9" tabindex="-1"><h2 id="fr-classer-renommer-construire-les-noms">9. Classer / Renommer : construire les noms</h2>
+<p>À gauche se trouvent l’image, le <strong>Nom actuel</strong>, le <strong>Nom cible</strong> et la navigation. À droite se trouvent les types, les usages graphiques, l’architecture des niveaux et les champs de réglage.</p>
+<p><strong>Choisir dossier</strong> charge les images compatibles. <strong>Inclure sous-dossiers</strong> étend le parcours aux dossiers descendants ; modifier cette option recharge la liste. L’indicateur <code>x / y</code> donne votre position dans les images chargées, pas le nombre de fichiers déjà renommés avec succès.</p>
+<h3 id="fr-du-général-au-particulier">Du général au particulier</h3>
+<p>Sélectionnez un <strong>Niveau 1</strong>, puis un <strong>Niveau 2</strong> appartenant au premier. Cochez ensuite, si nécessaire, un ou plusieurs <strong>Niveaux 3</strong> de cette branche. Par exemple, une structure personnelle pourrait contenir <code>Animaux &gt; Chevaux &gt; Profil</code>. Cet exemple illustre la méthode ; vous pouvez créer les termes absents de votre modèle.</p>
+<p>Changer le parent actualise les niveaux disponibles. Les petits menus à côté des titres ouvrent une sélection plus confortable. Les listes disposent d’un défilement lorsque toutes les entrées ne tiennent pas à l’écran.</p>
+<h3 id="fr-types-et-usages-graphiques">Types et usages graphiques</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Marqueur</th>
+<th>Utilité documentaire</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PHOTO / Dessin</td>
+<td>Indiquer la nature de la référence.</td>
+</tr>
+<tr class="even">
+<td>Master</td>
+<td>Signaler une référence particulièrement utile ou exemplaire.</td>
+</tr>
+<tr class="odd">
+<td>Composition</td>
+<td>Organisation des masses, cadrage et circulation du regard.</td>
+</tr>
+<tr class="even">
+<td>Forme / Silhouette</td>
+<td>Volumes, contours et lisibilité d’une pose.</td>
+</tr>
+<tr class="odd">
+<td>Couleur</td>
+<td>Harmonies, dominantes et rapports colorés.</td>
+</tr>
+<tr class="even">
+<td>Lumiere / Valeurs</td>
+<td>Éclairage et répartition des clairs et des foncés.</td>
+</tr>
+<tr class="odd">
+<td>Echelle</td>
+<td>Rapports de taille et repères dimensionnels.</td>
+</tr>
+<tr class="even">
+<td>Marche / Course / Combat</td>
+<td>Appuis, mouvement et narration gestuelle.</td>
+</tr>
+</tbody>
+</table>
+<p>Les niveaux décrivent le sujet ; les marqueurs décrivent aussi son intérêt pour le dessin. Cochez les usages réellement utiles pour éviter que toutes les images portent toutes les étiquettes. Les dix cases d’usage affichées dans cette version sont celles du tableau ; « Saut », cité dans une ancienne aide, n’est pas une case proposée dans ce panneau.</p>
+<h3 id="fr-ordre-du-nom-automatique">Ordre du nom automatique</h3>
+<pre class="text"><code>DOCUMENTATION_N1_N2_N3_Type_Inspiration_Precision_001.jpg</code></pre>
+<p>Les parties non renseignées sont omises. Plusieurs N3, types ou inspirations peuvent se succéder. Exemple avec un modèle personnalisé :</p>
+<pre class="text"><code>DOCUMENTATION_Animaux_Chevaux_Profil_PHOTO_Valeurs_contrejour_001.jpg</code></pre>
+<p>Les éléments automatiques sont nettoyés : accents retirés, espaces remplacés par <code>_</code>, caractères interdits supprimés et éléments limités à 80 caractères chacun. Cette limite par élément n’est pas une garantie sur la longueur totale du chemin. L’extension d’origine est conservée.</p>
+<p>Le <strong>Compteur</strong> ajoute un numéro d’au moins trois chiffres (<code>001</code>, <code>002</code>, puis <code>1000</code> si nécessaire). Il augmente après un renommage réussi. Vide, il n’ajoute pas de suffixe numérique. <strong>Précision</strong> ajoute un complément libre avant ce numéro. Les petites croix effacent les champs correspondants.</p>
+<h3 id="fr-valider-et-poursuivre">Valider et poursuivre</h3>
+<p>Vérifiez toujours le Nom cible, puis cliquez sur <strong>RENOMMER (Entrée)</strong>. Le fichier est renommé sur le disque et l’image suivante s’affiche. Une collision est refusée : modifiez la précision ou le compteur. Les choix de nomenclature restent disponibles pour traiter une série ; revérifiez ceux qui ne conviennent plus à l’image suivante.</p>
+<p>Les boutons <strong>Nom actuel</strong> et <strong>Nomenclature</strong> servent à changer de méthode. Nom actuel copie le nom existant dans le champ cible pour une correction manuelle. Taper directement dans ce champ active également le mode manuel. Nomenclature réactive le calcul automatique à partir des choix courants ; ce n’est pas une annulation du dernier renommage.</p>
+<p><strong>Ouvrir fichier</strong>, <strong>Dossier</strong>, <strong>Précédent</strong>, <strong>Suivant</strong> et le petit <strong>i</strong> complètent le parcours. Les métadonnées comprennent notamment le chemin, la taille du fichier, sa date de modification et ses dimensions lorsqu’elles sont disponibles.</p>
+</section><section id="fr-10" data-chapter="10" tabindex="-1"><h2 id="fr-rechercher-et-modifier-les-niveaux">10. Rechercher et modifier les niveaux</h2>
+<p><strong>Recherche niveaux</strong> interroge toute la hiérarchie, sans distinction de casse ou d’accents. Vous pouvez saisir plusieurs termes pour retrouver une branche. La frappe seule ne remplace pas vos choix : consultez la suggestion, parcourez les propositions avec <strong>haut / bas</strong>, puis validez avec <strong>Entrée</strong>. Dans ce champ, Entrée choisit la suggestion au lieu de renommer le fichier. La croix vide la recherche.</p>
+<p>Les champs <strong>N1</strong>, <strong>N2</strong> et <strong>N3</strong> du bas servent à modifier l’architecture :</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>Procédure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ajouter un N1</td>
+<td>Saisir son nom dans N1, puis cliquer sur +.</td>
+</tr>
+<tr class="even">
+<td>Ajouter un N2</td>
+<td>Sélectionner d’abord son N1 parent, saisir N2, puis +.</td>
+</tr>
+<tr class="odd">
+<td>Ajouter un N3</td>
+<td>Sélectionner N1 et N2, saisir N3, puis +.</td>
+</tr>
+<tr class="even">
+<td>Supprimer un N1 ou N2</td>
+<td>Sélectionner la catégorie, puis utiliser son bouton - et confirmer.</td>
+</tr>
+<tr class="odd">
+<td>Supprimer des N3</td>
+<td>Cocher les éléments concernés, utiliser - et confirmer.</td>
+</tr>
+<tr class="even">
+<td>Supprimer depuis une liste</td>
+<td>Utiliser le clic droit sur l’entrée concernée.</td>
+</tr>
+</tbody>
+</table>
+<p>Supprimer une catégorie modifie l’architecture, et supprimer un parent retire sa branche. Cela ne supprime ni ne renomme les fichiers qui utilisaient ces mots. Ces fichiers peuvent encore être recherchés par leur nom, mais le rangement automatique peut ne plus reconnaître leur ancienne catégorie.</p>
+<p>Les champs d’ajout ne remplacent pas les sélections : écrire un mot dans N2 sans cliquer sur + ne crée pas une catégorie.</p>
+</section><section id="fr-11" data-chapter="11" tabindex="-1"><h2 id="fr-architecture-et-langue-de-classement">11. Architecture et langue de classement</h2>
+<p><strong>Sauver architecture</strong> exporte la hiérarchie dans un fichier <code>.docarch.json</code>, avec la langue de classement. <strong>Charger architecture</strong> remplace la structure courante par celle d’un fichier exporté. Ce fichier contient des catégories, pas vos images, favoris ou collectes.</p>
+<p><strong>Reset</strong>, dans le bloc d’architecture, revient au modèle d’origine de la langue de classement après confirmation. Il ne doit pas être confondu avec Reset recherche dans Bibliothèque. Sauvegardez vos catégories personnalisées avant un remplacement ou une réinitialisation.</p>
+<p><strong>Classement…</strong> permet de choisir un modèle français ou anglais. Le choix concerne les catégories et les marqueurs ajoutés aux futurs noms, indépendamment du sélecteur FR / EN de l’interface. Par exemple :</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Classement français</th>
+<th>Classement anglais</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DOCUMENTATION_Animaux_Chevaux_001.jpg</code></td>
+<td><code>DOCUMENTATION_Animals_Horses_001.jpg</code></td>
+</tr>
+<tr class="even">
+<td>Marqueur Couleur</td>
+<td>Marqueur Color</td>
+</tr>
+<tr class="odd">
+<td>Marqueur Master</td>
+<td>Marqueur Prime</td>
+</tr>
+</tbody>
+</table>
+<p>Ce changement ne traduit pas les fichiers déjà renommés ni les précisions que vous avez écrites. Il remplace l’architecture après confirmation. Une bibliothèque mêlant des noms français et anglais reste consultable, mais vos requêtes doivent utiliser les bons termes ; le rangement dépend aussi des catégories du modèle actif.</p>
+<p>Morgue mémorise une architecture et une langue de classement par dossier de travail, y compris vos suppressions de catégories. Lorsqu’un ancien fichier d’architecture ne précise pas sa langue, l’import conserve la langue de classement courante.</p>
+</section><section id="fr-12" data-chapter="12" tabindex="-1"><h2 id="fr-ranger-les-fichiers-dans-les-dossiers">12. Ranger les fichiers dans les dossiers</h2>
+<p><strong>Renommer</strong> change le nom dans le dossier courant. <strong>Ranger DOCUMENTATION</strong> déplace les fichiers dans une arborescence construite à partir des niveaux reconnus dans leurs noms. Ce sont deux opérations différentes.</p>
+<ol type="1">
+<li>Vérifiez le dossier source et l’option <strong>Inclure sous-dossiers</strong>. Le rangement porte sur ce périmètre, pas seulement sur l’image affichée ou les résultats transmis par Bibliothèque.</li>
+<li>Vérifiez que l’architecture active correspond aux noms de vos fichiers.</li>
+<li>Cliquez sur <strong>Ranger DOCUMENTATION</strong>.</li>
+<li>Choisissez une racine Documentation existante, ou l’emplacement où en créer une.</li>
+<li>Consultez le bilan des déplacements et des fichiers non reconnus.</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Niveaux reconnus</th>
+<th>Destination dans la racine choisie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>N1, N2 et un seul N3</td>
+<td><code>N1/N2/N3</code></td>
+</tr>
+<tr class="even">
+<td>N1 et N2, sans N3 unique ou avec plusieurs N3</td>
+<td><code>N1/N2</code></td>
+</tr>
+<tr class="odd">
+<td>N1 seul</td>
+<td><code>N1</code></td>
+</tr>
+<tr class="even">
+<td>Aucun N1 reconnu</td>
+<td>Fichier ignoré et signalé.</td>
+</tr>
+</tbody>
+</table>
+<p>Le rangement examine les noms commençant par <code>DOCUMENTATION</code>. Pour l’indexation dans Bibliothèque, utilisez bien la nomenclature complète avec <code>DOCUMENTATION_</code>. Les noms déjà présents à destination reçoivent un suffixe ; les fichiers existants ne sont pas écrasés.</p>
+<p>Les déplacements faits dans Morgue mettent à jour l’index et conservent les favoris et la collecte. Si la destination constitue une autre bibliothèque, elle devient le dossier de travail après rangement. Il n’existe pas de commande générale permettant d’annuler toute une opération de rangement : conservez une sauvegarde de vos images avant une réorganisation importante.</p>
+</section><section id="fr-13" data-chapter="13" tabindex="-1"><h2 id="fr-atelier-préparer-une-séance">13. Atelier : préparer une séance</h2>
+<p>Dans Bibliothèque, cliquez sur <strong>Atelier</strong>. Le panneau propose cinq sources : les résultats de la <strong>Recherche actuelle</strong>, les <strong>Favoris</strong>, la <strong>Collecte</strong>, un <strong>fichier externe</strong> ou un <strong>dossier externe</strong>. Le dossier externe est parcouru avec ses sous-dossiers, sans imposer le préfixe documentaire.</p>
+<p>La Recherche actuelle utilise uniquement les résultats chargés. Les sources Favoris et Collecte utilisent leurs ensembles indexés dans la bibliothèque active, indépendamment de cette limite d’affichage.</p>
+<p>Choisissez une durée par image : <strong>30 secondes, 1, 2, 5, 10 ou 30 minutes</strong>. <strong>Temps libre</strong> signifie ici une durée personnalisée saisie en minutes, et non une séance sans chronomètre. Pour observer sans décompte, utilisez Pause pendant la séance.</p>
+<p>Choisissez ensuite l’ordre <strong>Normal</strong> ou <strong>Aléatoire</strong>, toutes les images ou une limite, puis un fond <strong>Sombre</strong>, <strong>Blanc</strong> ou <strong>Neutre</strong>. Avec l’ordre aléatoire et une limite, le mélange précède la sélection du nombre demandé.</p>
+<p>Cliquez sur <strong>Démarrer</strong>. La séance s’ouvre dans sa propre fenêtre, avec progression automatique au terme de chaque durée. Elle se termine après la dernière image ; vous pouvez aussi la quitter avant.</p>
+</section><section id="fr-14" data-chapter="14" tabindex="-1"><h2 id="fr-atelier-observer-et-analyser">14. Atelier : observer et analyser</h2>
+<p>Les outils de séance modifient uniquement l’affichage. Ils ne réécrivent pas vos fichiers originaux et ne constituent pas un export d’images retouchées.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Outil</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normal</td>
+<td>Voir les couleurs d’origine.</td>
+</tr>
+<tr class="even">
+<td>Gris</td>
+<td>Lire l’image sans les différences de teinte.</td>
+</tr>
+<tr class="odd">
+<td>Noir et blanc</td>
+<td>Examiner une séparation forte entre clairs et foncés.</td>
+</tr>
+<tr class="even">
+<td>Trois valeurs / Cinq valeurs</td>
+<td>Simplifier l’organisation tonale.</td>
+</tr>
+<tr class="odd">
+<td>Flou</td>
+<td>Observer les grandes masses en atténuant les détails.</td>
+</tr>
+<tr class="even">
+<td>Composition</td>
+<td>Superposer des repères de tiers et de diagonales.</td>
+</tr>
+<tr class="odd">
+<td>Grille / Prise de mesure</td>
+<td>Comparer les proportions avec une grille dont la taille et les décalages horizontal et vertical sont réglables.</td>
+</tr>
+<tr class="even">
+<td>Couleur de grille</td>
+<td>Choisir un contraste plus lisible sur l’image.</td>
+</tr>
+<tr class="odd">
+<td>Miroirs horizontal et vertical</td>
+<td>Renouveler la perception des formes et des déséquilibres.</td>
+</tr>
+<tr class="even">
+<td>Rotation</td>
+<td>Changer l’orientation d’observation.</td>
+</tr>
+<tr class="odd">
+<td>Fond sombre, blanc ou neutre</td>
+<td>Comparer la lecture des valeurs selon leur environnement.</td>
+</tr>
+</tbody>
+</table>
+<p>Le clic droit dans la séance ouvre les commandes d’affichage. Précédent et Suivant changent de référence ; <strong>Espace</strong> met en pause ou reprend le décompte. <strong>Échap</strong> ferme d’abord la fenêtre de réglage de grille si elle est ouverte, puis permet de quitter la séance.</p>
+<p>Pour un exercice de silhouettes, choisissez des poses, réglez 30 secondes et observez surtout les appuis et la direction générale. Pour une étude de composition, préférez une durée longue, puis comparez l’image normale, le flou et les trois valeurs. Ces suggestions ne sont pas des modes automatiques supplémentaires.</p>
+</section><section id="fr-15" data-chapter="15" tabindex="-1"><h2 id="fr-raccourcis-clavier">15. Raccourcis clavier</h2>
+<p>Les commandes dépendent de l’espace actif. Les raccourcis par lettres et les flèches de navigation de Bibliothèque ne doivent pas être confondus avec la saisie dans un champ texte.</p>
+<h3 id="fr-bibliothèque">Bibliothèque</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Raccourci</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ctrl+O</td>
+<td>Choisir le dossier de bibliothèque.</td>
+</tr>
+<tr class="even">
+<td>Ctrl+L / Ctrl+N</td>
+<td>Activer la recherche / le champ de renommage.</td>
+</tr>
+<tr class="odd">
+<td>Entrée dans Recherche</td>
+<td>Lancer la recherche.</td>
+</tr>
+<tr class="even">
+<td>Haut / Bas dans Recherche</td>
+<td>Parcourir l’historique.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+Entrée dans le nom</td>
+<td>Appliquer le renommage rapide.</td>
+</tr>
+<tr class="even">
+<td>Gauche / Droite, hors saisie</td>
+<td>Image précédente / suivante.</td>
+</tr>
+<tr class="odd">
+<td>f / k</td>
+<td>Basculer le favori / la collecte de l’image.</td>
+</tr>
+<tr class="even">
+<td>Maj+K</td>
+<td>Ajouter les résultats chargés à la collecte.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+K / Ctrl+Maj+K</td>
+<td>Afficher / purger la collecte.</td>
+</tr>
+<tr class="even">
+<td>Alt+K</td>
+<td>Exporter la collecte.</td>
+</tr>
+<tr class="odd">
+<td>F6 ou a / Maj+F6</td>
+<td>Afficher le panneau Atelier / démarrer la séance.</td>
+</tr>
+<tr class="even">
+<td>F1</td>
+<td>Ouvrir l’aide.</td>
+</tr>
+<tr class="odd">
+<td>Échap</td>
+<td>Fermer le panneau Atelier ou interrompre l’indexation.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-classer-renommer">Classer / Renommer</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Raccourci</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ctrl+O</td>
+<td>Choisir le dossier à traiter.</td>
+</tr>
+<tr class="even">
+<td>Ctrl+Maj+O / Ctrl+Maj+F</td>
+<td>Ouvrir l’image / son dossier.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+I / Ctrl+R</td>
+<td>Injecter le nom actuel / réactiver la nomenclature.</td>
+</tr>
+<tr class="even">
+<td>Gauche / Droite, hors saisie</td>
+<td>Image précédente / suivante.</td>
+</tr>
+<tr class="odd">
+<td>Entrée</td>
+<td>Renommer et poursuivre ; dans Recherche niveaux, valider la suggestion.</td>
+</tr>
+<tr class="even">
+<td>Haut / Bas dans Recherche niveaux</td>
+<td>Parcourir les suggestions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-fenêtre-de-séance-atelier">Fenêtre de séance Atelier</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Raccourci</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gauche / Droite</td>
+<td>Référence précédente / suivante.</td>
+</tr>
+<tr class="even">
+<td>Espace</td>
+<td>Pause / reprise.</td>
+</tr>
+<tr class="odd">
+<td>1 / 2 / 3</td>
+<td>Normal / gris / noir et blanc.</td>
+</tr>
+<tr class="even">
+<td>4 / 5 / 6</td>
+<td>Trois valeurs / cinq valeurs / flou.</td>
+</tr>
+<tr class="odd">
+<td>7 / 8 / 9</td>
+<td>Composition / couleur de grille / afficher ou masquer la grille.</td>
+</tr>
+<tr class="even">
+<td>m / p / r</td>
+<td>Miroir horizontal / miroir vertical / rotation.</td>
+</tr>
+<tr class="odd">
+<td>Échap</td>
+<td>Fermer les réglages de grille, ou quitter la séance.</td>
+</tr>
+</tbody>
+</table>
+<p>Les chiffres du pavé numérique sont également reconnus dans la séance. Si un raccourci n’agit pas, cliquez dans la fenêtre concernée et vérifiez qu’un champ de saisie ou une boîte de dialogue n’a pas le focus.</p>
+</section><section id="fr-16" data-chapter="16" tabindex="-1"><h2 id="fr-réglages-sauvegarde-et-déplacement">16. Réglages, sauvegarde et déplacement</h2>
+<p>Morgue travaille localement. Il ne fournit pas de compte en ligne ni de synchronisation distante de votre documentation. Les réglages enregistrés automatiquement assurent la continuité de travail, mais ne remplacent pas une sauvegarde des images.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Élément</th>
+<th>Contenu ou rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Votre dossier de documentation</td>
+<td>Les fichiers images eux-mêmes.</td>
+</tr>
+<tr class="even">
+<td><code>morgue_settings.json</code></td>
+<td>Dossier partagé, langue d’interface, infobulles, architectures et langues de classement par bibliothèque.</td>
+</tr>
+<tr class="odd">
+<td><code>index_documentation.db</code></td>
+<td>Catalogue et indicateurs de favoris et de collecte.</td>
+</tr>
+<tr class="even">
+<td><code>index_documentation_settings.json</code></td>
+<td>Préférences de Bibliothèque, historique et réglages d’Atelier.</td>
+</tr>
+<tr class="odd">
+<td><code>settings.json</code></td>
+<td>Réglages du renommeur : dossier, compteur, précision et sélections notamment.</td>
+</tr>
+<tr class="even">
+<td><code>documentation_structure_user.json</code></td>
+<td>Données d’architecture historique conservées pour la reprise des versions antérieures.</td>
+</tr>
+<tr class="odd">
+<td><code>index_documentation_thumbs</code></td>
+<td>Cache des vignettes, reconstituable.</td>
+</tr>
+<tr class="even">
+<td><code>logs</code></td>
+<td>Journaux utiles au diagnostic ; ils ne constituent pas une commande d’annulation.</td>
+</tr>
+<tr class="odd">
+<td>Fichiers <code>.docarch.json</code> exportés</td>
+<td>Copies indépendantes de vos architectures.</td>
+</tr>
+</tbody>
+</table>
+<p>Pour une sauvegarde complète, fermez Morgue puis copiez <strong>le dossier du programme avec ses données et le dossier des images</strong> sur votre support de sauvegarde. Un export d’architecture ne suffit pas à conserver les favoris ; un export de collecte ne contient que les images sélectionnées.</p>
+<p>Pour une mise à jour, conservez les fichiers de données et remplacez le logiciel. Si vous utilisez l’exécutable, placez la nouvelle version dans le dossier contenant vos données existantes. Évitez d’ouvrir simultanément les anciens programmes et Morgue sur les mêmes fichiers.</p>
+<p>Les chemins jouent un rôle dans l’index et les indicateurs. Copier la bibliothèque ailleurs avec l’Explorateur puis réindexer ne garantit pas de retrouver les favoris et la collecte associés aux anciens chemins. Les déplacements réalisés par <strong>Ranger DOCUMENTATION</strong> bénéficient de la synchronisation interne. Pour une migration vers un autre ordinateur ou un autre disque, conservez les sauvegardes avant toute réorganisation et vérifiez vos indicateurs après reprise.</p>
+</section><section id="fr-17" data-chapter="17" tabindex="-1"><h2 id="fr-résoudre-les-difficultés-courantes">17. Résoudre les difficultés courantes</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Vérification et action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aucune image dans Bibliothèque</td>
+<td>Vérifiez la racine, les extensions, le préfixe <code>DOCUMENTATION_</code>, puis indexez et réinitialisez la recherche.</td>
+</tr>
+<tr class="even">
+<td>Les images apparaissent dans le renommeur, pas dans Bibliothèque</td>
+<td>Le renommeur accepte les noms bruts ; la Bibliothèque exige la nomenclature documentaire.</td>
+</tr>
+<tr class="odd">
+<td>Une recherche anglaise ne retrouve pas un nom français</td>
+<td>La langue d’interface ne traduit pas les fichiers. Cherchez les mots de leur nom ou de leur dossier.</td>
+</tr>
+<tr class="even">
+<td>Je ne vois que 500 résultats</td>
+<td>Chargez la tranche suivante au bas des vignettes.</td>
+</tr>
+<tr class="odd">
+<td>Un fichier renommé disparaît des résultats</td>
+<td>Vérifiez s’il correspond encore à la requête et s’il conserve le préfixe.</td>
+</tr>
+<tr class="even">
+<td>La nomenclature ne modifie plus le Nom cible</td>
+<td>Cliquez sur Nomenclature pour quitter l’édition manuelle.</td>
+</tr>
+<tr class="odd">
+<td>Une collision empêche le renommage</td>
+<td>Choisissez un compteur ou une précision qui produit un nom encore libre.</td>
+</tr>
+<tr class="even">
+<td>Le rangement ne reconnaît pas mes noms</td>
+<td>Vérifiez la langue et les catégories de l’architecture active. Consultez le bilan des fichiers ignorés.</td>
+</tr>
+<tr class="odd">
+<td>Mes changements externes ne sont pas visibles</td>
+<td>Réindexez après modification dans l’Explorateur ou un autre programme.</td>
+</tr>
+<tr class="even">
+<td>Des commandes sont bloquées</td>
+<td>Vérifiez si une indexation est en cours ; attendez ou interrompez-la avec Échap.</td>
+</tr>
+<tr class="odd">
+<td>Les infobulles ont disparu</td>
+<td>Ouvrez i, puis cochez Afficher les infobulles.</td>
+</tr>
+<tr class="even">
+<td>Les champs du bas sont hors écran</td>
+<td>Agrandissez la fenêtre et faites défiler les listes de niveaux dans leurs propres zones. Vérifiez aussi la mise à l’échelle de l’écran.</td>
+</tr>
+<tr class="odd">
+<td>L’ancienne icône ou l’ancien design apparaît</td>
+<td>Lancez le nouvel exécutable reconstruit et remplacez le raccourci épinglé vers l’ancienne version.</td>
+</tr>
+<tr class="even">
+<td>Une image refuse de s’ouvrir</td>
+<td>Vérifiez qu’elle existe encore et essayez Ouvrir image dans la visionneuse du système.</td>
+</tr>
+</tbody>
+</table>
+</section><section id="fr-18" data-chapter="18" tabindex="-1"><h2 id="fr-repères-et-crédits">18. Repères et crédits</h2>
+<p><strong>Architecture</strong> : vocabulaire hiérarchisé des niveaux. <strong>Index</strong> : catalogue des fichiers. <strong>Nomenclature</strong> : règle de construction de leurs noms. <strong>Favori</strong> : indicateur mémorisé d’une référence privilégiée. <strong>Collecte</strong> : sélection de travail exportable. <strong>Atelier</strong> : espace d’observation et d’exercice. <strong>Dossier de travail</strong> : racine documentaire active, commune aux deux espaces.</p>
+<p>Morgue / Eigrutel Lab. Programme conçu et développé par <strong>Simon Léturgie</strong>, dans le cadre d’<strong>Eigrutel BD Academy</strong>.</p>
+<p>Code source et programme compilé : <strong>GNU AGPL v3.0 ou version ultérieure</strong>. Documentation et ressources : <strong>CC BY-SA 4.0, sauf mention contraire</strong>. Les bibliothèques tierces conservent leurs licences respectives. Marques, logos et signes distinctifs Eigrutel / Eigrutel Lab / Eigrutel BD Academy : <strong>réservés</strong>.</p>
+<p>Les mentions de licence du logiciel et de ce manuel ne modifient pas les droits attachés aux images que vous classez. Ce manuel a été établi à partir des anciens manuels et du code de Morgue 3.1.12. Les libellés et fonctions décrits se rapportent à cette version.</p>
+</section></article><article lang="en" id="edition-en" hidden><div class="intro"><h1 id="morgue-user-manual">Morgue / User manual</h1>
+<p><strong>A library for organizing and studying visual references</strong></p>
+<p>Manual for Morgue 3.1.12 / Edition dated 10 September 2026.</p>
+<p>Designed and developed by Simon Léturgie as part of Eigrutel BD Academy. Eigrutel Lab / Open tools workshop for comics.</p>
+<p>This manual covers the Python desktop application and its Windows executable. It can be read independently of the program. The HTML edition contains both French and English, a contents panel, search and a print layout. It works offline; its language selector does not change the language of Morgue itself.</p>
+</div><section id="en-01" data-chapter="1" tabindex="-1"><h2 id="en-understanding-morgue">1. Understanding Morgue</h2>
+<p>Morgue brings the former Documentation Renamer and Index Documentation programs together in one application. Prepare your references, find them and use them for drawing without launching two separate programs.</p>
+<p>Two workspaces share the same window and working folder: <strong>Library</strong>, with a dark blue toolbar, and <strong>Organize / Rename</strong>, with a dark red toolbar. <strong>Studio</strong>, available from the Library, opens a separate window for observation and timed drawing practice.</p>
+<p>The documentation system relies on <strong>filenames and folder paths</strong>. Morgue does not automatically identify what an image depicts, translate its subject or perform AI visual searches. A horse photograph called <code>IMG_4582.jpg</code> will not be found by searching for “horse” unless that word appears in the information being searched.</p>
+<p>The common prefix <strong><code>DOCUMENTATION_</code></strong> tells the Library which images to index. It stays the same in French and English. Your images remain ordinary files on your drive; the index is a catalogue for finding them, not a copy of the images.</p>
+</section><section id="en-02" data-chapter="2" tabindex="-1"><h2 id="en-installing-and-launching">2. Installing and launching</h2>
+<h3 id="en-using-the-windows-executable">Using the Windows executable</h3>
+<p>Place <code>Morgue-3.1.12.exe</code> in a folder you can write to, then open it. Python is not required to use an executable that has already been built. The application modules and resources are bundled inside the executable; working data and settings are saved alongside it.</p>
+<p>The application folder and your image folder have different roles: the first contains the software and its operating data; the second contains the references you want to browse and organize. Select the latter inside Morgue.</p>
+<h3 id="en-using-the-python-sources">Using the Python sources</h3>
+<p>Keep all files from the program archive together. With Python 3.10 or later and Tkinter available, open a terminal in that folder and run:</p>
+<pre class="text"><code>py -3 -m pip install -r requirements.txt
+py -3 EigrutelMorgue.py</code></pre>
+<p>To build the executable on Windows, run <strong>Construire_Morgue.cmd</strong>. The first build downloads its dependencies; the result is <code>dist/Morgue-3.1.12.exe</code>. Editing a Python file does not update an executable that has already been built.</p>
+<h3 id="en-supported-formats">Supported formats</h3>
+<p>Morgue recognizes <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.webp</code>, <code>.bmp</code>, <code>.tif</code> and <code>.tiff</code> images. PDFs, videos, text documents and Photoshop files are not part of this workflow. A supported extension does not guarantee that a damaged file can be read.</p>
+<p>The Library also requires the <code>DOCUMENTATION_</code> prefix. Organize / Rename accepts supported images before they have been renamed. Studio can open an external file or folder without requiring this prefix.</p>
+</section><section id="en-03" data-chapter="3" tabindex="-1"><h2 id="en-getting-started">3. Getting started</h2>
+<h3 id="en-your-images-have-not-been-prepared-yet">Your images have not been prepared yet</h3>
+<ol type="1">
+<li>Open <strong>Organize / Rename</strong>, then <strong>Choose folder</strong>.</li>
+<li>Enable <strong>Include subfolders</strong> if the images are spread across several folders.</li>
+<li>Choose classification levels, useful tags and optional details.</li>
+<li>Check the <strong>Target name</strong> and click <strong>RENAME (Enter)</strong>. The program moves on to the next image.</li>
+<li>To organize the actual folders as well, use <strong>Sort DOCUMENTATION</strong>, explained in chapter 12.</li>
+<li>Switch to <strong>Library</strong>, check the chosen folder and run <strong>Index / Reindex</strong> to establish the initial catalogue of your collection.</li>
+</ol>
+<h3 id="en-your-images-already-have-documentation_-names">Your images already have DOCUMENTATION_ names</h3>
+<ol type="1">
+<li>In the Library, click <strong>Load DOCUMENTATION</strong> and choose the root of your reference library.</li>
+<li>Click <strong>Index / Reindex</strong>. Subfolders are included in indexing.</li>
+<li>Wait for completion, then enter a word found in a filename or folder.</li>
+<li>Click a thumbnail to inspect the image. Mark it as a favorite or add it to the collection if it is useful.</li>
+</ol>
+<p>You do not need to reindex after every rename made inside Morgue: internal changes are synchronized with the index. Reindexing is still useful for discovering an existing collection or changes made outside Morgue.</p>
+</section><section id="en-04" data-chapter="4" tabindex="-1"><h2 id="en-navigation-languages-and-help">4. Navigation, languages and help</h2>
+<p>The <strong>Morgue</strong> label occupies the same position in both toolbars. Navigation buttons also indicate their destination through color: red for Organize / Rename, dark blue for Library. Clicking the workspace that is already active does not restart your browsing session.</p>
+<p>From Library, <strong>Organize / Rename</strong> carries over the selected image and the currently loaded search results. The renamer’s Previous and Next buttons then browse that set. To process an entire folder, use <strong>Choose folder</strong> in the renamer. Do not confuse this results-based browsing set with automatic sorting, which examines the source folder according to the subfolder option.</p>
+<p><strong>FR / EN</strong> immediately changes controls and help text. Your choice is saved, but filenames, categories and search terms are not translated. <strong>Classification…</strong>, in Organize / Rename, separately selects the category template and the vocabulary used in future filenames. See chapter 11.</p>
+<p>The <strong>i in the toolbar</strong> opens help for the current workspace and the <strong>About</strong> page, with clickable contents. The <strong>Complete manual</strong> button at the bottom opens this manual in your browser, offline and in Morgue’s current language. It is available from both workspaces and from the Help and About pages. The manual is bundled inside the executable; the page remains available after Morgue closes. The <strong>Show tooltips</strong> checkbox enables or disables hover help throughout the application. This preference is remembered between launches. The <strong>small i below the renamer preview</strong> shows file metadata and serves a different purpose.</p>
+<p>On compatible Windows versions, the title bar adopts the color of the active workspace. If this customization is unsupported, Windows keeps its usual appearance.</p>
+</section><section id="en-05" data-chapter="5" tabindex="-1"><h2 id="en-library-indexing-and-browsing">5. Library: indexing and browsing</h2>
+<p>The Library places thumbnails on the left, a large preview in the center, and search, collection and Studio controls on the right. The indexed-image count describes the catalogue; the result count depends on your current search.</p>
+<p><strong>Index / Reindex</strong> scans the chosen folder and its subfolders. The old index is kept until the new indexing operation succeeds. Press <strong>Esc</strong> to interrupt the operation. While it is running, Morgue blocks renaming, sorting and folder changes to avoid inconsistent paths.</p>
+<p>Results load in <strong>groups of 500</strong>. A count such as <code>500 / 9491</code> means that 500 of 9,491 matches are loaded. Use the additional-results button at the bottom of the grid to continue. Collecting all results and using Studio’s “Current search” source operate on the loaded results only.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Gesture or command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Click a thumbnail</td>
+<td>Select the image and show it in the center.</td>
+</tr>
+<tr class="even">
+<td>Double-click a thumbnail</td>
+<td>Open the file in its associated system application.</td>
+</tr>
+<tr class="odd">
+<td>Mouse wheel over results</td>
+<td>Scroll the thumbnails.</td>
+</tr>
+<tr class="even">
+<td>Previous / Next</td>
+<td>Browse the loaded results.</td>
+</tr>
+<tr class="odd">
+<td>Open image</td>
+<td>Open the current image in your usual viewer.</td>
+</tr>
+<tr class="even">
+<td>Open folder</td>
+<td>Access its location on your drive.</td>
+</tr>
+</tbody>
+</table>
+<p>Below the preview, the filename and folder identify the actual file. The displayed image is a preview; displaying it does not alter the source file.</p>
+</section><section id="en-06" data-chapter="6" tabindex="-1"><h2 id="en-searching-effectively">6. Searching effectively</h2>
+<p>Search ignores case and accents and accepts word fragments. All entered terms must match, possibly in different parts of the filename and path. A short delay starts the search as you type; <strong>Enter</strong> starts it immediately.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Query</th>
+<th>What it searches for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>horse</code></td>
+<td>This fragment in the filename or path.</td>
+</tr>
+<tr class="even">
+<td><code>horse red</code></td>
+<td>Both terms.</td>
+</tr>
+<tr class="odd">
+<td><code>horse -running</code></td>
+<td>Horse, excluding matches that contain running.</td>
+</tr>
+<tr class="even">
+<td><code>-cat</code></td>
+<td>An exclusion without requiring a positive term.</td>
+</tr>
+<tr class="odd">
+<td><code>"street scene"</code></td>
+<td>A group of words together in the normalized text.</td>
+</tr>
+<tr class="even">
+<td><code>name:horse</code></td>
+<td>Search the filename only.</td>
+</tr>
+<tr class="odd">
+<td><code>folder:costume</code></td>
+<td>Search the folder path only.</td>
+</tr>
+<tr class="even">
+<td><code>ext:jpg</code></td>
+<td>The jpg extension; jpeg is a separate extension.</td>
+</tr>
+<tr class="odd">
+<td><code>folder:costume -name:test</code></td>
+<td>A folder containing costume, without test in the filename.</td>
+</tr>
+</tbody>
+</table>
+<p>The French aliases <strong><code>nom:</code></strong> and <strong><code>dossier:</code></strong> also work when the interface is in English. English aliases work in French. However, <code>horse</code> and <code>cheval</code> are not translated into each other: use the words actually present in your documentation.</p>
+<p>Underscores in names are also treated as word separators during search. Thus, <code>"street scene"</code> can match <code>street_scene</code>. Without quotation marks, <code>street scene</code> requires both terms without requiring them to be adjacent.</p>
+<p>The <strong>Composition, Form, Silhouette, Color, Light, Values, Scale</strong> checkboxes add their words to the query. They do not analyze the image. Selecting several checkboxes combines the criteria. The inserted words follow the classification language, which may differ from the interface language.</p>
+<p><strong>Favorites</strong> and <strong>Collection</strong> restrict the search to marked images. When both are selected, images belonging to either group are included, while still matching the other search terms. The toolbar’s <strong>=★</strong> and <strong>=☑</strong> buttons activate these filters; they do not mark the current image.</p>
+<p><strong>Reset search</strong> clears the query and disables the filters. It does not delete files, favorites or collection membership. In the Search field, the up and down arrows recall query history; right-click to access the command for clearing it.</p>
+<p>Start with a simple term. If there are too many results, add a visual-use tag, a folder or an exclusion. If nothing is found, remove the filters before concluding that an image is missing.</p>
+</section><section id="en-07" data-chapter="7" tabindex="-1"><h2 id="en-favorites-collection-and-export">7. Favorites, collection and export</h2>
+<p>A <strong>favorite</strong> identifies a reference you want to find again over time. The <strong>collection</strong> gathers a working selection, for example for a scene or an album. These flags are independent and saved per library; closing Morgue does not clear the collection.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Star below the preview</td>
+<td>Add or remove the current image’s favorite flag.</td>
+</tr>
+<tr class="even">
+<td>Small square on a thumbnail</td>
+<td>Add or remove that image from the collection.</td>
+</tr>
+<tr class="odd">
+<td>Square below the preview / Image button</td>
+<td>Add or remove the current image from the collection.</td>
+</tr>
+<tr class="even">
+<td>All results</td>
+<td>Add the currently loaded results to the collection.</td>
+</tr>
+<tr class="odd">
+<td>Show collection</td>
+<td>Display the collection and clear the current text query.</td>
+</tr>
+<tr class="even">
+<td>Clear collection</td>
+<td>Remove all collection flags after confirmation. Images stay on your drive.</td>
+</tr>
+<tr class="odd">
+<td>Export collection</td>
+<td>Copy collected images into a folder you choose.</td>
+</tr>
+</tbody>
+</table>
+<p>Export includes the active library’s entire indexed collection even when not all its thumbnails are loaded. Copies are gathered in the chosen folder without reproducing the original folder hierarchy. Existing names receive a suffix to prevent overwriting. Copy errors are reported; originals remain in place.</p>
+<p>A useful approach is to collect broadly for a project, then mark the clearest references as favorites. The <strong>Prime</strong> filename tag is a separate concept: selecting Prime in the renamer does not automatically create a favorite flag in the database. This tag is called Master in French classification.</p>
+</section><section id="en-08" data-chapter="8" tabindex="-1"><h2 id="en-correcting-a-filename-in-the-library">8. Correcting a filename in the Library</h2>
+<p>Select the image, edit the field below the preview and click <strong>Rename</strong>, or press <strong>Ctrl+Enter in that field</strong>. This command renames the actual file in its folder and updates the index.</p>
+<p>Keep the original extension. If you omit it, Morgue adds it back; if you try to change it, the program refuses. Empty names, characters forbidden by Windows and name collisions are rejected. Changing a filename does not convert the image format.</p>
+<p>Also keep the <code>DOCUMENTATION_</code> prefix so the document remains eligible for indexing. A renamed file may no longer match the current query and can therefore disappear from the results without being deleted.</p>
+<p>To build a filename from levels, types and visual-use tags, switch to <strong>Organize / Rename</strong>.</p>
+</section><section id="en-09" data-chapter="9" tabindex="-1"><h2 id="en-organize-rename-building-filenames">9. Organize / Rename: building filenames</h2>
+<p>The left side contains the image, <strong>Current name</strong>, <strong>Target name</strong> and navigation controls. The right side contains types, visual-use tags, the level structure and naming settings.</p>
+<p><strong>Choose folder</strong> loads supported images. <strong>Include subfolders</strong> extends browsing into descendant folders; changing this option reloads the list. The <code>x / y</code> indicator shows your position among loaded images, not the number of successfully renamed files.</p>
+<h3 id="en-from-general-to-specific">From general to specific</h3>
+<p>Select a <strong>Level 1</strong>, then a <strong>Level 2</strong> belonging to it. If needed, select one or more <strong>Level 3</strong> items in that branch. For example, a personal structure might contain <code>Animals &gt; Horses &gt; Profile</code>. This is an illustration of the method; create any terms missing from your template.</p>
+<p>Changing a parent refreshes the available child levels. The small menus beside the level headings open a more spacious selection window. Lists can be scrolled when their contents do not fit on screen.</p>
+<h3 id="en-types-and-visual-uses">Types and visual uses</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tag</th>
+<th>Documentary purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PHOTO / Drawing</td>
+<td>Identify the nature of the reference.</td>
+</tr>
+<tr class="even">
+<td>Prime</td>
+<td>Flag an especially useful or exemplary reference.</td>
+</tr>
+<tr class="odd">
+<td>Composition</td>
+<td>Arrangement of masses, framing and eye flow.</td>
+</tr>
+<tr class="even">
+<td>Form / Silhouette</td>
+<td>Volumes, outlines and readability of a pose.</td>
+</tr>
+<tr class="odd">
+<td>Color</td>
+<td>Harmonies, dominant colors and color relationships.</td>
+</tr>
+<tr class="even">
+<td>Light / Values</td>
+<td>Lighting and the distribution of light and dark.</td>
+</tr>
+<tr class="odd">
+<td>Scale</td>
+<td>Size relationships and dimensional clues.</td>
+</tr>
+<tr class="even">
+<td>Walk / Run / Fight</td>
+<td>Support, movement and storytelling through gesture.</td>
+</tr>
+</tbody>
+</table>
+<p>Levels describe the subject; tags also describe its usefulness for drawing. Choose the uses that matter, rather than giving every image every tag. The ten visible visual-use checkboxes in this version are the ones in the table; “Jump,” mentioned in older help text, is not offered as a checkbox in this panel.</p>
+<h3 id="en-automatic-filename-order">Automatic filename order</h3>
+<pre class="text"><code>DOCUMENTATION_L1_L2_L3_Type_Inspiration_Details_001.jpg</code></pre>
+<p>Unfilled parts are omitted. Several Level 3 items, types or visual-use tags may appear in sequence. Example using a custom template:</p>
+<pre class="text"><code>DOCUMENTATION_Animals_Horses_Profile_PHOTO_Values_backlit_001.jpg</code></pre>
+<p>Automatic naming elements are cleaned: accents are removed, spaces become <code>_</code>, forbidden characters are removed and each element is limited to 80 characters. This per-element limit does not guarantee that the entire path will be short enough. The original extension is preserved.</p>
+<p>The <strong>Counter</strong> adds a number with at least three digits (<code>001</code>, <code>002</code>, then <code>1000</code> when needed). It increases after a successful rename. An empty field adds no numeric suffix. <strong>Details</strong> adds free text before the number. The small crosses clear their respective fields.</p>
+<h3 id="en-applying-the-name-and-continuing">Applying the name and continuing</h3>
+<p>Always check the Target name, then click <strong>RENAME (Enter)</strong>. The file is renamed on your drive and the next image appears. A collision is refused: change the details or counter. Naming choices remain available for processing a series; check which ones no longer apply to the next image.</p>
+<p><strong>Current name</strong> and <strong>Naming rules</strong> switch between two methods. Current name copies the existing filename into the target field for manual correction. Typing directly in that field also enables manual mode. Naming rules restores automatic construction from the current choices; it does not undo the last rename.</p>
+<p><strong>Open file</strong>, <strong>Folder</strong>, <strong>Previous</strong>, <strong>Next</strong> and the small <strong>i</strong> complete the workflow. Metadata includes the path, file size, modification date and image dimensions when available.</p>
+</section><section id="en-10" data-chapter="10" tabindex="-1"><h2 id="en-finding-and-editing-levels">10. Finding and editing levels</h2>
+<p><strong>Search levels</strong> searches the entire hierarchy without case or accent sensitivity. Enter several terms to locate a branch. Typing alone does not replace your current choices: review the suggestion, use <strong>up / down</strong> to browse suggestions, then press <strong>Enter</strong>. In this field, Enter selects the suggestion instead of renaming the file. The cross clears the search.</p>
+<p>The <strong>L1</strong>, <strong>L2</strong> and <strong>L3</strong> fields at the bottom modify the structure:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>Procedure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Add a Level 1</td>
+<td>Enter its name in L1, then click +.</td>
+</tr>
+<tr class="even">
+<td>Add a Level 2</td>
+<td>Select its parent Level 1 first, enter L2, then click +.</td>
+</tr>
+<tr class="odd">
+<td>Add a Level 3</td>
+<td>Select Levels 1 and 2, enter L3, then click +.</td>
+</tr>
+<tr class="even">
+<td>Delete a Level 1 or 2</td>
+<td>Select the category, use its - button and confirm.</td>
+</tr>
+<tr class="odd">
+<td>Delete Level 3 items</td>
+<td>Check the relevant items, use - and confirm.</td>
+</tr>
+<tr class="even">
+<td>Delete directly from a list</td>
+<td>Right-click the relevant entry.</td>
+</tr>
+</tbody>
+</table>
+<p>Deleting a category changes the structure, and deleting a parent removes its branch. It does not delete or rename files that used those words. Those files can still be searched by name, but automatic sorting may no longer recognize their former category.</p>
+<p>The add fields do not replace selections: typing a word in L2 without clicking + does not create a category.</p>
+</section><section id="en-11" data-chapter="11" tabindex="-1"><h2 id="en-structure-and-classification-language">11. Structure and classification language</h2>
+<p><strong>Save structure</strong> exports the hierarchy to a <code>.docarch.json</code> file along with the classification language. <strong>Load structure</strong> replaces the current structure with an exported one. This file contains categories, not your images, favorites or collections.</p>
+<p><strong>Reset</strong>, in the structure controls, restores the original template for the classification language after confirmation. Do not confuse it with Reset search in the Library. Save your custom categories before replacing or resetting them.</p>
+<p><strong>Classification…</strong> offers a French or English template. This choice governs categories and tags used in future filenames, independently of the interface’s FR / EN selector. For example:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>French classification</th>
+<th>English classification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DOCUMENTATION_Animaux_Chevaux_001.jpg</code></td>
+<td><code>DOCUMENTATION_Animals_Horses_001.jpg</code></td>
+</tr>
+<tr class="even">
+<td>Couleur tag</td>
+<td>Color tag</td>
+</tr>
+<tr class="odd">
+<td>Master tag</td>
+<td>Prime tag</td>
+</tr>
+</tbody>
+</table>
+<p>This change does not translate files already renamed or details you typed yourself. It replaces the structure after confirmation. A library containing both French and English filenames can still be browsed, but queries must use the appropriate words; sorting also depends on the active template’s categories.</p>
+<p>Morgue remembers a structure and classification language for each working folder, including categories you deleted. When an older structure file does not specify a language, importing it keeps the current classification language.</p>
+</section><section id="en-12" data-chapter="12" tabindex="-1"><h2 id="en-sorting-files-into-folders">12. Sorting files into folders</h2>
+<p><strong>Rename</strong> changes a filename in its current folder. <strong>Sort DOCUMENTATION</strong> moves files into a hierarchy based on the levels recognized in their names. These are separate operations.</p>
+<ol type="1">
+<li>Check the source folder and <strong>Include subfolders</strong> option. Sorting covers that scope, not just the displayed image or results passed over by the Library.</li>
+<li>Check that the active structure matches your filenames.</li>
+<li>Click <strong>Sort DOCUMENTATION</strong>.</li>
+<li>Select an existing Documentation root or the location where you want to create one.</li>
+<li>Read the report of moved and unrecognized files.</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Recognized levels</th>
+<th>Destination within the chosen root</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>L1, L2 and exactly one L3</td>
+<td><code>L1/L2/L3</code></td>
+</tr>
+<tr class="even">
+<td>L1 and L2, without a unique L3 or with several L3 items</td>
+<td><code>L1/L2</code></td>
+</tr>
+<tr class="odd">
+<td>L1 only</td>
+<td><code>L1</code></td>
+</tr>
+<tr class="even">
+<td>No recognized L1</td>
+<td>File skipped and reported.</td>
+</tr>
+</tbody>
+</table>
+<p>Sorting examines names beginning with <code>DOCUMENTATION</code>. For Library indexing, use the full naming convention with <code>DOCUMENTATION_</code>. Names already present at the destination receive a suffix; existing files are not overwritten.</p>
+<p>Moves performed within Morgue update the index and preserve favorite and collection flags. If the destination is another library, it becomes the working folder after sorting. There is no general command to undo an entire sorting operation: keep a backup of your images before a major reorganization.</p>
+</section><section id="en-13" data-chapter="13" tabindex="-1"><h2 id="en-studio-preparing-a-session">13. Studio: preparing a session</h2>
+<p>In the Library, click <strong>Studio</strong>. The panel offers five sources: <strong>Current search</strong> results, <strong>Favorites</strong>, <strong>Collection</strong>, an <strong>external file</strong> or an <strong>external folder</strong>. External folders are scanned with their subfolders and do not require the documentation prefix.</p>
+<p>Current search uses only loaded results. Favorites and Collection use their indexed sets in the active library, independently of that display limit.</p>
+<p>Choose a time per image: <strong>30 seconds, 1, 2, 5, 10 or 30 minutes</strong>. <strong>Custom time</strong> accepts a duration in minutes; it does not mean an untimed session. To observe without a countdown, pause the session.</p>
+<p>Next choose <strong>Normal</strong> or <strong>Random</strong> order, all images or a limit, and a <strong>Dark</strong>, <strong>White</strong> or <strong>Neutral</strong> background. When using random order with a limit, the images are shuffled before the requested number is selected.</p>
+<p>Click <strong>Start</strong>. The session opens in its own window, advancing automatically when each image’s time expires. It ends after the last image, and you may also leave earlier.</p>
+</section><section id="en-14" data-chapter="14" tabindex="-1"><h2 id="en-studio-observing-and-analyzing">14. Studio: observing and analyzing</h2>
+<p>Session tools change the display only. They do not rewrite your original files or export edited images.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normal</td>
+<td>See the original colors.</td>
+</tr>
+<tr class="even">
+<td>Grayscale</td>
+<td>Read the image without differences in hue.</td>
+</tr>
+<tr class="odd">
+<td>Black and white</td>
+<td>Examine a strong separation between light and dark.</td>
+</tr>
+<tr class="even">
+<td>Three values / Five values</td>
+<td>Simplify the tonal arrangement.</td>
+</tr>
+<tr class="odd">
+<td>Blur</td>
+<td>Observe large masses while reducing detail.</td>
+</tr>
+<tr class="even">
+<td>Composition</td>
+<td>Overlay guides for thirds and diagonals.</td>
+</tr>
+<tr class="odd">
+<td>Grid / Measuring grid</td>
+<td>Compare proportions using a grid with adjustable size and horizontal and vertical offsets.</td>
+</tr>
+<tr class="even">
+<td>Grid color</td>
+<td>Choose a more readable contrast against the image.</td>
+</tr>
+<tr class="odd">
+<td>Horizontal and vertical flips</td>
+<td>Refresh your perception of shapes and imbalances.</td>
+</tr>
+<tr class="even">
+<td>Rotation</td>
+<td>Change the viewing orientation.</td>
+</tr>
+<tr class="odd">
+<td>Dark, white or neutral background</td>
+<td>Compare how the surroundings affect your reading of values.</td>
+</tr>
+</tbody>
+</table>
+<p>Right-click within the session to open display commands. Previous and Next change the reference; <strong>Space</strong> pauses or resumes the countdown. <strong>Esc</strong> first closes the grid settings window if it is open, and otherwise lets you leave the session.</p>
+<p>For silhouette practice, choose poses, set 30 seconds and focus on support and overall direction. For composition study, choose a longer duration, then compare normal view, blur and three values. These are suggested exercises, not additional automatic modes.</p>
+</section><section id="en-15" data-chapter="15" tabindex="-1"><h2 id="en-keyboard-shortcuts">15. Keyboard shortcuts</h2>
+<p>Commands depend on the active workspace. Letter shortcuts and the Library’s navigation arrows are distinct from typing in a text field.</p>
+<h3 id="en-library">Library</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ctrl+O</td>
+<td>Choose the library folder.</td>
+</tr>
+<tr class="even">
+<td>Ctrl+L / Ctrl+N</td>
+<td>Focus search / the filename field.</td>
+</tr>
+<tr class="odd">
+<td>Enter in Search</td>
+<td>Run the search.</td>
+</tr>
+<tr class="even">
+<td>Up / Down in Search</td>
+<td>Browse query history.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+Enter in the filename</td>
+<td>Apply quick renaming.</td>
+</tr>
+<tr class="even">
+<td>Left / Right outside text entry</td>
+<td>Previous / next image.</td>
+</tr>
+<tr class="odd">
+<td>f / k</td>
+<td>Toggle the current image’s favorite / collection flag.</td>
+</tr>
+<tr class="even">
+<td>Shift+K</td>
+<td>Add loaded results to the collection.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+K / Ctrl+Shift+K</td>
+<td>Show / clear the collection.</td>
+</tr>
+<tr class="even">
+<td>Alt+K</td>
+<td>Export the collection.</td>
+</tr>
+<tr class="odd">
+<td>F6 or a / Shift+F6</td>
+<td>Show the Studio panel / start the session.</td>
+</tr>
+<tr class="even">
+<td>F1</td>
+<td>Open help.</td>
+</tr>
+<tr class="odd">
+<td>Esc</td>
+<td>Close the Studio panel or interrupt indexing.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="en-organize-rename">Organize / Rename</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ctrl+O</td>
+<td>Choose the folder to process.</td>
+</tr>
+<tr class="even">
+<td>Ctrl+Shift+O / Ctrl+Shift+F</td>
+<td>Open the image / its folder.</td>
+</tr>
+<tr class="odd">
+<td>Ctrl+I / Ctrl+R</td>
+<td>Insert the current name / restore automatic naming.</td>
+</tr>
+<tr class="even">
+<td>Left / Right outside text entry</td>
+<td>Previous / next image.</td>
+</tr>
+<tr class="odd">
+<td>Enter</td>
+<td>Rename and continue; in Search levels, select the suggestion.</td>
+</tr>
+<tr class="even">
+<td>Up / Down in Search levels</td>
+<td>Browse suggestions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="en-studio-session-window">Studio session window</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Left / Right</td>
+<td>Previous / next reference.</td>
+</tr>
+<tr class="even">
+<td>Space</td>
+<td>Pause / resume.</td>
+</tr>
+<tr class="odd">
+<td>1 / 2 / 3</td>
+<td>Normal / grayscale / black and white.</td>
+</tr>
+<tr class="even">
+<td>4 / 5 / 6</td>
+<td>Three values / five values / blur.</td>
+</tr>
+<tr class="odd">
+<td>7 / 8 / 9</td>
+<td>Composition / grid color / show or hide the grid.</td>
+</tr>
+<tr class="even">
+<td>m / p / r</td>
+<td>Horizontal flip / vertical flip / rotation.</td>
+</tr>
+<tr class="odd">
+<td>Esc</td>
+<td>Close grid settings or leave the session.</td>
+</tr>
+</tbody>
+</table>
+<p>The numeric keypad is also recognized during sessions. If a shortcut does nothing, click within the relevant window and check whether a text field or dialog has focus.</p>
+</section><section id="en-16" data-chapter="16" tabindex="-1"><h2 id="en-settings-backup-and-relocation">16. Settings, backup and relocation</h2>
+<p>Morgue works locally. It does not provide an online account or remote synchronization of your documentation. Automatically saved settings support continuity, but they do not replace image backups.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Contents or purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Your documentation folder</td>
+<td>The actual image files.</td>
+</tr>
+<tr class="even">
+<td><code>morgue_settings.json</code></td>
+<td>Shared folder, interface language, tooltips, structures and classification languages per library.</td>
+</tr>
+<tr class="odd">
+<td><code>index_documentation.db</code></td>
+<td>Catalogue and favorite and collection flags.</td>
+</tr>
+<tr class="even">
+<td><code>index_documentation_settings.json</code></td>
+<td>Library preferences, query history and Studio settings.</td>
+</tr>
+<tr class="odd">
+<td><code>settings.json</code></td>
+<td>Renamer preferences, including folder, counter, details and selections.</td>
+</tr>
+<tr class="even">
+<td><code>documentation_structure_user.json</code></td>
+<td>Historical structure data retained for continuity with earlier versions.</td>
+</tr>
+<tr class="odd">
+<td><code>index_documentation_thumbs</code></td>
+<td>Thumbnail cache, which can be rebuilt.</td>
+</tr>
+<tr class="even">
+<td><code>logs</code></td>
+<td>Diagnostic logs; they are not an undo command.</td>
+</tr>
+<tr class="odd">
+<td>Exported <code>.docarch.json</code> files</td>
+<td>Independent copies of your structures.</td>
+</tr>
+</tbody>
+</table>
+<p>For a full backup, close Morgue, then copy <strong>the application folder with its data and your image folder</strong> to your backup destination. A structure export does not preserve favorites; a collection export contains only the selected images.</p>
+<p>When updating, keep the data files and replace the software. If using the executable, place the new version in the folder containing your existing data. Avoid running the old standalone programs and Morgue simultaneously on the same files.</p>
+<p>Paths play a role in the index and flags. Copying a library elsewhere with File Explorer and then reindexing does not guarantee recovery of the favorites and collection associated with the old paths. Moves made through <strong>Sort DOCUMENTATION</strong> benefit from internal synchronization. When migrating to another computer or drive, keep backups before reorganizing anything and check your flags afterwards.</p>
+</section><section id="en-17" data-chapter="17" tabindex="-1"><h2 id="en-troubleshooting">17. Troubleshooting</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Check and action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No images in the Library</td>
+<td>Check the root, extensions and <code>DOCUMENTATION_</code> prefix, then index and reset the search.</td>
+</tr>
+<tr class="even">
+<td>Images appear in the renamer but not in Library</td>
+<td>The renamer accepts raw filenames; Library requires documentary naming.</td>
+</tr>
+<tr class="odd">
+<td>An English query cannot find a French filename</td>
+<td>Interface language does not translate files. Search words from their names or folders.</td>
+</tr>
+<tr class="even">
+<td>Only 500 results are visible</td>
+<td>Load the next group at the bottom of the thumbnails.</td>
+</tr>
+<tr class="odd">
+<td>A renamed file disappears from results</td>
+<td>Check whether it still matches the query and retains the prefix.</td>
+</tr>
+<tr class="even">
+<td>Naming choices no longer change the Target name</td>
+<td>Click Naming rules to leave manual mode.</td>
+</tr>
+<tr class="odd">
+<td>A collision prevents renaming</td>
+<td>Choose details or a counter that produces an unused filename.</td>
+</tr>
+<tr class="even">
+<td>Sorting does not recognize my names</td>
+<td>Check the active structure’s language and categories. Read the skipped-file report.</td>
+</tr>
+<tr class="odd">
+<td>External changes are not visible</td>
+<td>Reindex after changes made in File Explorer or another program.</td>
+</tr>
+<tr class="even">
+<td>Some commands are blocked</td>
+<td>Check whether indexing is running; wait or interrupt it with Esc.</td>
+</tr>
+<tr class="odd">
+<td>Tooltips have disappeared</td>
+<td>Open i and enable Show tooltips.</td>
+</tr>
+<tr class="even">
+<td>Bottom fields are off screen</td>
+<td>Enlarge the window and scroll the level lists within their own areas. Also check display scaling.</td>
+</tr>
+<tr class="odd">
+<td>The old icon or design still appears</td>
+<td>Launch the newly rebuilt executable and replace shortcuts pinned to the old version.</td>
+</tr>
+<tr class="even">
+<td>An image will not open</td>
+<td>Check that it still exists and try Open image in the system viewer.</td>
+</tr>
+</tbody>
+</table>
+</section><section id="en-18" data-chapter="18" tabindex="-1"><h2 id="en-terms-and-credits">18. Terms and credits</h2>
+<p><strong>Structure</strong>: the hierarchy of category levels. <strong>Index</strong>: the file catalogue. <strong>Naming rules</strong>: the rules used to construct filenames. <strong>Favorite</strong>: a saved flag identifying a preferred reference. <strong>Collection</strong>: an exportable working selection. <strong>Studio</strong>: the observation and practice workspace. <strong>Working folder</strong>: the active documentation root shared by both workspaces.</p>
+<p>Morgue / Eigrutel Lab. Designed and developed by <strong>Simon Léturgie</strong> as part of <strong>Eigrutel BD Academy</strong>.</p>
+<p>Source code and compiled program: <strong>GNU AGPL v3.0 or later</strong>. Documentation and resources: <strong>CC BY-SA 4.0 unless otherwise stated</strong>. Third-party libraries retain their respective licenses. Eigrutel / Eigrutel Lab / Eigrutel BD Academy trademarks, logos and distinctive signs: <strong>reserved</strong>.</p>
+<p>The licenses for the software and this manual do not change the rights attached to the images you organize. This manual was prepared from the earlier manuals and the Morgue 3.1.12 source code. The labels and functions described refer to that version.</p>
+</section></article>
+  <p class="return"><a href="#main" id="top">Retour en haut</a></p>
+  <footer>Eigrutel Lab / Simon Léturgie / Eigrutel BD Academy<br>Documentation : CC BY-SA 4.0 / 10-09-2026</footer>
+ </main>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const labels={fr:{title:'Morgue / Manuel d’utilisation',subtitle:'Manuel d’utilisation / 3.1.12',menu:'Sommaire',print:'Imprimer / PDF',searchlabel:'Rechercher dans le manuel',placeholder:'Ex. collecte, niveaux…',clear:'Effacer la recherche',empty:'Aucun chapitre trouvé. Essayez un autre mot.',note:'L’impression inclut toute l’édition choisie, même après une recherche.',top:'Retour en haut',skip:'Aller au manuel'},en:{title:'Morgue / User manual',subtitle:'User manual / 3.1.12',menu:'Contents',print:'Print / PDF',searchlabel:'Search this manual',placeholder:'E.g. collection, levels…',clear:'Clear search',empty:'No chapter found. Try another word.',note:'Printing includes the entire selected edition, even after a search.',top:'Back to top',skip:'Skip to manual'}};
+let lang='fr';
+const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function filter(){
+ const words=normalize($('#search').value).trim().split(/\s+/).filter(Boolean);
+ const chapters=$$(`#edition-${lang} section`);let count=0;
+ chapters.forEach(section=>{const match=words.every(w=>normalize(section.textContent).includes(w));section.hidden=!match;count+=Number(match);$(`#contents-${lang} a[data-chapter="${section.dataset.chapter}"]`).hidden=!match;});
+ $(`#edition-${lang} .intro`).hidden=words.length>0;
+ $('#noresults').hidden=count!==0;
+ $('#status').textContent=words.length?(lang==='fr'?`${count} chapitre(s) sur 18`:`${count} chapter(s) of 18`):(lang==='fr'?'18 chapitres / Lecture hors connexion':'18 chapters / Offline reading');
+}
+function setLanguage(value,chapter){
+ lang=value==='en'?'en':'fr';const t=labels[lang];document.documentElement.lang=lang;document.title=t.title;
+ $$('article').forEach(x=>x.hidden=x.lang!==lang);$$('aside nav').forEach(x=>x.hidden=x.lang!==lang);
+ $$('[data-lang]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.lang===lang)));
+ for(const id of ['subtitle','menu','print','searchlabel','top','skip'])$('#'+id).textContent=t[id];
+ $('#search').placeholder=t.placeholder;$('#clear').setAttribute('aria-label',t.clear);$('#noresults').textContent=t.empty;$('#printnote').textContent=t.note;
+ $('#search').value='';filter();try{localStorage.setItem('morgue-manual-language',lang)}catch{}
+ if(chapter){location.hash=`${lang}-${String(chapter).padStart(2,'0')}`;document.getElementById(location.hash.slice(1))?.scrollIntoView();}
+}
+function currentChapter(){return $$(`#edition-${lang} section`).filter(x=>!x.hidden).find(x=>x.getBoundingClientRect().bottom>120)?.dataset.chapter;}
+$$('[data-lang]').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.lang!==lang)setLanguage(button.dataset.lang,currentChapter());}));
+$('#search').addEventListener('input',filter);
+$('#search').addEventListener('keydown',e=>{if(e.key==='Escape'){$('#search').value='';filter();}if(e.key==='Enter'){const target=$(`#edition-${lang} section:not([hidden])`);if(target){target.scrollIntoView();target.focus({preventScroll:true});$('#sidebar').classList.remove('open');$('#menu').setAttribute('aria-expanded','false');}}});
+$('#clear').addEventListener('click',()=>{$('#search').value='';filter();$('#search').focus();});
+$('#menu').addEventListener('click',()=>{$('#menu').setAttribute('aria-expanded',String($('#sidebar').classList.toggle('open')));});
+$$('aside nav a').forEach(link=>link.addEventListener('click',()=>{$$('aside nav a').forEach(x=>x.removeAttribute('aria-current'));link.setAttribute('aria-current','location');$('#sidebar').classList.remove('open');$('#menu').setAttribute('aria-expanded','false');}));
+$('#print').addEventListener('click',()=>window.print());
+// Print all chapters in the selected language, including the introduction.
+let introHidden=false;addEventListener('beforeprint',()=>{const intro=$(`#edition-${lang} .intro`);introHidden=intro.hidden;intro.hidden=false;});
+addEventListener('afterprint',()=>{$(`#edition-${lang} .intro`).hidden=introHidden;});
+const initial=location.hash.match(/^#(fr|en)-(\d{2})$/);let saved='fr';try{saved=localStorage.getItem('morgue-manual-language')||'fr'}catch{}
+setLanguage(initial?initial[1]:saved,initial?initial[2]:null);
+addEventListener('hashchange',()=>{const match=location.hash.match(/^#(fr|en)-(\d{2})$/);if(match&&match[1]!==lang)setLanguage(match[1],match[2]);});
+})();
+</script>
+</body>
+</html>
