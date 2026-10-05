@@ -3,8 +3,8 @@
 # Programme conçu et développé par Simon Léturgie
 # dans le cadre d'Eigrutel BD Academy.
 # Nom public : Morgue
-# Version : 3.1.12
-# Date : 10-09-2026
+# Version : 3.1.13
+# Date : 05-10-2026
 # Application de bureau : sources Python (.py) et exécutable Windows (.exe).
 # Code source et programme compilé : GNU AGPL v3.0 ou version ultérieure.
 # Documentation et ressources : CC BY-SA 4.0, sauf mention contraire.
@@ -28,13 +28,13 @@ import morgue_library as library
 import morgue_renamer as renamer
 from morgue_workspace import relocate_indexed_file
 
-VERSION = '3.1.12'
+VERSION = '3.1.13'
 SETTINGS_FILE = os.path.join(app_dir(), 'morgue_settings.json')
 ABOUT = """Eigrutel Lab / Atelier d'outils libres pour la bande dessinée
 Programme conçu et développé par Simon Léturgie
 dans le cadre d'Eigrutel BD Academy.
 
-Morgue / Version 3.1.12 / 10-09-2026
+Morgue / Version 3.1.13 / 05-10-2026
 Application de bureau : Python (.py) et exécutable Windows (.exe).
 
 Code source et programme compilé : GNU AGPL v3.0 ou version ultérieure.

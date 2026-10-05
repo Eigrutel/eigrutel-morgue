@@ -5,7 +5,7 @@ import sys
 import struct
 
 
-BUILD_NAME = 'Morgue-3.1.12'
+BUILD_NAME = 'Morgue-3.1.13'
 
 
 def read_ico_payloads(path):

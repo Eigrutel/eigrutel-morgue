@@ -8,7 +8,7 @@ if errorlevel 1 goto erreur
 ".venv\Scripts\python.exe" build_windows.py
 if errorlevel 1 goto erreur
 echo.
-echo Morgue-3.1.12.exe est dans le dossier dist.
+echo Morgue-3.1.13.exe est dans le dossier dist.
 echo Fermez l ancien Morgue puis lancez ce nouveau fichier.
 echo Placez-le dans votre dossier habituel de donnees Morgue.
 pause
