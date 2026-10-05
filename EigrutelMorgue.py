@@ -72,7 +72,7 @@ class Morgue:
         apply_app_icon(root)
         self.folder_var = tk.StringVar(value=tr('Choisissez un dossier de travail'))
         self.language_var = tk.StringVar(value=i18n.language().upper())
-        self.navigation_var = tk.StringVar(value='library')
+        self.navigation_var = tk.StringVar(value='renamer')
         style = ttk.Style(root)
         self.chrome_style = style
         # Pages retain Notebook focus/event behavior; navigation lives in each toolbar.
@@ -110,7 +110,8 @@ class Morgue:
         self.renamer = renamer.DocumentationRenamer(self.rename_page, self)
         self._legacy_structure = copy.deepcopy(self.renamer.structure)
         self.library._create_local_styles()
-        self.active_view = self.library
+        self.active_view = self.renamer
+        self.tabs.select(self.rename_page)
         self.tabs.bind('<<NotebookTabChanged>>', self.on_tab_changed)
         root.bind('<Map>', lambda event: root.after_idle(self.update_title_color) if event.widget is root else None, add='+')
         root.after_idle(self.update_title_color)
@@ -121,7 +122,7 @@ class Morgue:
         else:
             self.library.folder = ''
             self.library.run_search()
-        self.library.entry_search.focus_set()
+        self.on_tab_changed()
 
     def set_tooltips_enabled(self, enabled):
         self.settings['tooltips_enabled'] = bool(enabled)

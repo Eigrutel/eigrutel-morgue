@@ -2665,11 +2665,26 @@ class MorgueApp(ttk.Frame):
         # colonne commandes
         commands = ttk.Frame(right_side, style="Panel.TFrame")
         commands.pack(side="left", fill="y", padx=(12, 0))
+        self.commands_panel = commands
         commands.configure(width=220)
         commands.pack_propagate(False)
 
-        cmd_wrap = ttk.Frame(commands, style="Panel.TFrame", padding=(12, 14, 12, 14))
-        cmd_wrap.pack(fill="both", expand=True)
+        self.commands_canvas = tk.Canvas(
+            commands, bg=UI.PANEL, highlightthickness=0, bd=0,
+            width=1, height=1, yscrollincrement=20, takefocus=0,
+        )
+        self.commands_scrollbar = ttk.Scrollbar(
+            commands, orient="vertical", command=self.commands_canvas.yview,
+        )
+        self.commands_canvas.configure(yscrollcommand=self.commands_scrollbar.set)
+        self.commands_canvas.pack(side="left", fill="both", expand=True)
+        cmd_wrap = ttk.Frame(self.commands_canvas, style="Panel.TFrame", padding=(12, 14, 12, 14))
+        self.commands_content = cmd_wrap
+        self.commands_window = self.commands_canvas.create_window(
+            (0, 0), window=cmd_wrap, anchor="nw",
+        )
+        cmd_wrap.bind("<Configure>", self._layout_commands, add="+")
+        self.commands_canvas.bind("<Configure>", self._layout_commands, add="+")
 
         
 
@@ -2818,6 +2833,11 @@ class MorgueApp(ttk.Frame):
             command=self.toggle_atelier_panel,
         )
         self.btn_atelier.pack(fill="x", pady=(0, 4))
+
+        # Keyboard navigation also reveals controls below the visible area.
+        self._bind_commands_focus(cmd_wrap)
+        for sequence in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
+            self.commands_canvas.bind(sequence, self._scroll_commands, add="+")
 
 
         right_header = ttk.Frame(right, style="Panel.TFrame")
@@ -3502,9 +3522,65 @@ class MorgueApp(ttk.Frame):
         except Exception:
             pass
 
+    def _layout_commands(self, _event=None):
+        """Keep every sidebar control reachable at any window height or DPI."""
+        canvas = self.commands_canvas
+        content = self.commands_content
+        scrollbar = self.commands_scrollbar
+        # Use the actual translated labels and fonts, not a fixed pixel width.
+        # Reserve scrollbar space even when hidden to avoid resize oscillation.
+        wanted = max(220, content.winfo_reqwidth() + scrollbar.winfo_reqwidth())
+        if self.commands_panel.winfo_reqwidth() != wanted:
+            self.commands_panel.configure(width=wanted)
+        width = max(1, canvas.winfo_width())
+        height = content.winfo_reqheight()
+        canvas.itemconfigure(self.commands_window, width=width)
+        canvas.configure(scrollregion=(0, 0, width, height))
+        if height > canvas.winfo_height():
+            if not scrollbar.winfo_manager():
+                scrollbar.pack(side="right", fill="y", before=canvas)
+        else:
+            if scrollbar.winfo_manager():
+                scrollbar.pack_forget()
+            canvas.yview_moveto(0)
+
+    def _bind_commands_focus(self, widget):
+        widget.bind("<FocusIn>", self._reveal_command, add="+")
+        # Widget-local bindings stop the wheel before other application handlers.
+        widget.bind("<MouseWheel>", self._scroll_commands, add="+")
+        widget.bind("<Button-4>", self._scroll_commands, add="+")
+        widget.bind("<Button-5>", self._scroll_commands, add="+")
+        for child in widget.winfo_children():
+            self._bind_commands_focus(child)
+
+    def _reveal_command(self, event):
+        canvas = self.commands_canvas
+        content = self.commands_content
+        top = event.widget.winfo_rooty() - content.winfo_rooty()
+        bottom = top + event.widget.winfo_height()
+        visible_top = canvas.canvasy(0)
+        visible_height = canvas.winfo_height()
+        total = max(1, content.winfo_reqheight())
+        if top < visible_top:
+            canvas.yview_moveto(max(0, top - 4) / total)
+        elif bottom > visible_top + visible_height:
+            canvas.yview_moveto((bottom + 4 - visible_height) / total)
+
+    def _scroll_commands(self, event):
+        if self.commands_content.winfo_reqheight() > self.commands_canvas.winfo_height():
+            if getattr(event, "num", None) in (4, 5):
+                steps = -1 if event.num == 4 else 1
+            else:
+                delta = event.delta
+                steps = (-1 if delta > 0 else 1) * max(1, int(abs(delta) / 120)) if delta else 0
+            self.commands_canvas.yview_scroll(steps, "units")
+        return "break"
+
     def _on_mousewheel(self, event):
         try:
             widget = self.root.winfo_containing(event.x_root, event.y_root)
+            if widget and self._is_descendant_of(widget, self.commands_panel):
+                return self._scroll_commands(event)
             if widget and self._is_descendant_of(widget, self.canvas_results):
                 self.canvas_results.yview_scroll(int(-1 * (event.delta / 120)), "units")
         except Exception:
@@ -4679,5 +4755,3 @@ class MorgueApp(ttk.Frame):
 # =========================
 # MAIN
 # =========================
-
-
